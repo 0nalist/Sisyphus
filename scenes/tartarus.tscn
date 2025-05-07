@@ -144,6 +144,7 @@ horizontal_alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 8
 
 [node name="MountainNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
 unique_name_in_owner = true
@@ -296,16 +297,28 @@ layout_mode = 2
 focus_mode = 0
 text = "Autobuy Weight"
 
-[node name="MusicButton" type="Button" parent="MarginContainer"]
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="AutoreflectCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 10
+text = "Autoreflect"
+
+[node name="MusicButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
 size_flags_vertical = 8
 focus_mode = 0
 toggle_mode = true
 text = "music"
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="MarginContainer/MusicButton"]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/MusicButton"]
 unique_name_in_owner = true
 stream = ExtResource("8_8ubw0")
 
@@ -314,4 +327,5 @@ stream = ExtResource("8_8ubw0")
 [connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/AutobuyStrengthCheckBox" to="." method="_on_autobuy_strength_check_box_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/WeightButton" to="." method="_on_weight_button_pressed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/AutobuyWeightCheckBox" to="." method="_on_autobuy_weight_check_box_toggled"]
-[connection signal="toggled" from="MarginContainer/MusicButton" to="." method="_on_music_button_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/AutoreflectCheckBox" to="." method="_on_autoreflect_check_box_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/MusicButton" to="." method="_on_music_button_toggled"]

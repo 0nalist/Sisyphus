@@ -7,7 +7,7 @@ extends Control
 var is_in_shop: bool = false
 var autobuy_strength_enabled := false
 var autobuy_weight_enabled := false
-
+var autoreflect_enabled := false
 
 @onready var progress_bar: ProgressBar = %ProgressBar
 @onready var suffering_label: Label = %SufferingLabel
@@ -23,6 +23,7 @@ var autobuy_weight_enabled := false
 
 @onready var autobuy_strength_check_box: CheckBox = %AutobuyStrengthCheckBox
 @onready var autobuy_weight_check_box: CheckBox = %AutobuyWeightCheckBox
+@onready var autoreflect_check_box: CheckBox = %AutoreflectCheckBox
 
 
 
@@ -43,7 +44,7 @@ var strength: float = 1.0
 
 var suffering: float = 0.0
 var meaning: float = 0.0
-var happiness: float = 0.0
+var happiness: float = 2.0
 var summits: int = 0
 
 # --- Upgradeable Economy Variables ---
@@ -72,6 +73,8 @@ var upgrade_effects = {
 	"enable_autobuy_weight": func(_value):
 		autobuy_weight_enabled = true
 		autobuy_weight_check_box.visible = true,
+	"enable_autoreflect": func(_value):
+		autoreflect_check_box.visible = true
 }
 
 const MOUNTAIN_NAMES = [
@@ -106,6 +109,9 @@ func _ready() -> void:
 	
 	update_mountain_height_label()
 	
+	autoreflect_check_box.hide()
+	autobuy_strength_check_box.hide()
+	autobuy_weight_check_box.hide()
 
 func _process(delta: float) -> void:
 	if is_in_shop:
@@ -208,6 +214,10 @@ func _handle_end_of_day(success: bool) -> void:
 	is_in_shop = true
 	var result_popup = day_end_scene.instantiate()
 	add_child(result_popup)
+	if autoreflect_enabled:
+		await get_tree().create_timer(.4).timeout
+		result_popup._on_continue_button_pressed()
+		is_in_shop = false
 
 	var progress_percent = (progress / summit_height) * 100.0
 	result_popup.setup(progress_percent, success)
@@ -227,6 +237,9 @@ func _on_end_of_day_result_closed() -> void:
 	await get_tree().process_frame
 	shop.setup(self)
 	shop.shop_closed.connect(_on_shop_closed)
+	if autoreflect_enabled:
+		await get_tree().create_timer(0.2).timeout
+		shop.exit_button.emit_signal("pressed")
 
 func _on_ascend_pressed() -> void:
 	summit_height *= 2
@@ -329,3 +342,7 @@ func _on_autobuy_strength_check_box_toggled(toggled_on: bool) -> void:
 
 func _on_autobuy_weight_check_box_toggled(toggled_on: bool) -> void:
 	autobuy_weight_enabled = toggled_on
+
+
+func _on_autoreflect_check_box_toggled(toggled_on: bool) -> void:
+	autoreflect_enabled = toggled_on
