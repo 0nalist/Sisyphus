@@ -49,25 +49,6 @@ func _load_upgrades():
 		else:
 			print("⚠️ Skipped non-upgrade resource")
 
-''' ## LOADS FROM FOLDER, doesnt work in HTML
-func _load_upgrades():
-	print("🧪 Loading upgrades from: ", upgrade_folder_path)
-	var dir := DirAccess.open(upgrade_folder_path)
-	if not dir:
-		print("❌ Could not open upgrade folder!")
-		return
-
-	for file in dir.get_files():
-		print("➡️ Found file: ", file)
-		if file.ends_with(".tres"):
-			var path = upgrade_folder_path + file
-			var upgrade_res = load(path)
-			if upgrade_res is Upgrade:
-				print("✅ Loaded Upgrade: ", upgrade_res.name)
-				_add_upgrade_button(upgrade_res)
-			else:
-				print("⚠️ Not an Upgrade resource: ", path)
-'''
 
 func _add_upgrade_button(upgrade: Upgrade):
 	var button = upgrade_button_scene.instantiate()

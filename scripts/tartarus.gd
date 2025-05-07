@@ -8,6 +8,7 @@ var is_in_shop: bool = false
 var autobuy_strength_enabled := false
 var autobuy_weight_enabled := false
 var autoreflect_enabled := false
+var autoascend_enabled := false
 
 var upgrades_to_reset: Array[Upgrade] = []
 
@@ -28,6 +29,7 @@ var upgrades_to_reset: Array[Upgrade] = []
 @onready var autobuy_strength_check_box: CheckBox = %AutobuyStrengthCheckBox
 @onready var autobuy_weight_check_box: CheckBox = %AutobuyWeightCheckBox
 @onready var autoreflect_check_box: CheckBox = %AutoreflectCheckBox
+@onready var auto_ascend_check_box: CheckBox = %AutoAscendCheckBox
 
 
 
@@ -83,7 +85,9 @@ var upgrade_effects = {
 		autobuy_weight_enabled = true
 		autobuy_weight_check_box.visible = true,
 	"enable_autoreflect": func(_value):
-		autoreflect_check_box.visible = true
+		autoreflect_check_box.visible = true,
+	"enable_autoascend": func(_value):
+		auto_ascend_check_box.visible = true,
 }
 
 const MOUNTAIN_NAMES = [
@@ -121,6 +125,7 @@ func _ready() -> void:
 	update_mountain_height_label()
 	
 	autoreflect_check_box.hide()
+	auto_ascend_check_box.hide()
 	autobuy_strength_check_box.hide()
 	autobuy_weight_check_box.hide()
 	
@@ -249,7 +254,13 @@ func _handle_end_of_day(success: bool) -> void:
 	is_in_shop = true
 	var result_popup = day_end_scene.instantiate()
 	add_child(result_popup)
-	if autoreflect_enabled:
+	
+	if autoascend_enabled and success:
+		await get_tree().create_timer(.4).timeout
+		result_popup._on_ascend_button_pressed()
+		_on_ascend_pressed()
+		is_in_shop = false
+	elif autoreflect_enabled:
 		await get_tree().create_timer(.4).timeout
 		result_popup._on_continue_button_pressed()
 		is_in_shop = false
@@ -406,4 +417,4 @@ func _on_autoreflect_check_box_toggled(toggled_on: bool) -> void:
 
 
 func _on_auto_ascend_check_box_toggled(toggled_on: bool) -> void:
-	pass # Replace with function body.
+	autoascend_enabled = toggled_on

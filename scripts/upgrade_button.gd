@@ -26,7 +26,7 @@ func setup(upg: Upgrade, tart: Node, shop_ref: Node):
 	]
 
 
-	button.text = "Buy"
+	button.text = "MAXXED" if not _can_buy_more() else "BUY"
 	button.disabled = not _can_afford(scaled_cost) or not _can_buy_more()
 
 
@@ -65,7 +65,7 @@ func _on_upgrade_button_pressed() -> void:
 func refresh():
 	var scaled_cost = upgrade.get_scaled_cost()
 	button.disabled = not _can_afford(scaled_cost) or not _can_buy_more()
-
+	button.text = "MAXXED" if not _can_buy_more() else "BUY"
 	label.text = "%s\nCost: %.2f %s%s" % [
 		upgrade.name,
 		scaled_cost,

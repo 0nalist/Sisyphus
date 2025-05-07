@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cp815mpgfya5x"]
+[gd_scene load_steps=18 format=3 uid="uid://cp815mpgfya5x"]
 
 [ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://assets/sisyphus_theme.tres" id="1_0ed4t"]
 [ext_resource type="Script" uid="uid://csfc7r40xa3il" path="res://scripts/upgrade_shop.gd" id="1_mxpyc"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://dr5fu2csokobi" path="res://upgrades/autoreflect_upgrade.tres" id="12_8goot"]
 [ext_resource type="Resource" uid="uid://c2wccdat8dyt1" path="res://upgrades/permanent_day_length_flat_upgrade.tres" id="13_gc2o6"]
 [ext_resource type="Resource" uid="uid://d3b3j010ihs5" path="res://upgrades/passive_meaning_per_second.tres" id="13_jbnth"]
+[ext_resource type="Resource" uid="uid://okkhusfcphwr" path="res://upgrades/autoascend_upgrade.tres" id="15_3xpl5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ed4t"]
 bg_color = Color(0.878431, 0.431373, 0.0156863, 1)
@@ -31,7 +32,7 @@ size_flags_vertical = 3
 theme = ExtResource("1_0ed4t")
 script = ExtResource("1_mxpyc")
 upgrade_button_scene = ExtResource("3_0lay5")
-upgrade_resources = Array[Resource]([ExtResource("4_q1psx"), ExtResource("5_8goot"), ExtResource("12_8goot"), ExtResource("13_gc2o6"), ExtResource("11_57m7w"), ExtResource("10_3r51h"), ExtResource("9_ojws6"), ExtResource("7_jbnth"), ExtResource("8_3xpl5"), ExtResource("13_jbnth"), ExtResource("6_gc2o6")])
+upgrade_resources = Array[Resource]([ExtResource("4_q1psx"), ExtResource("5_8goot"), ExtResource("12_8goot"), ExtResource("13_gc2o6"), ExtResource("11_57m7w"), ExtResource("10_3r51h"), ExtResource("9_ojws6"), ExtResource("7_jbnth"), ExtResource("8_3xpl5"), ExtResource("13_jbnth"), ExtResource("6_gc2o6"), ExtResource("15_3xpl5")])
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
