@@ -105,6 +105,7 @@ func _ready() -> void:
 	autobuy_weight_check_box.button_pressed = autobuy_weight_enabled
 	
 	update_mountain_height_label()
+	
 
 func _process(delta: float) -> void:
 	if is_in_shop:

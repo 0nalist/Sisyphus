@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://deaxcdfpqhaf3"]
 
-[ext_resource type="Script" uid="uid://b8qbm4u3q4vhy" path="res://upgrade.gd" id="1_cre1c"]
+[ext_resource type="Script" uid="uid://b8qbm4u3q4vhy" path="res://scripts/upgrade.gd" id="1_cre1c"]
 
 [resource]
 script = ExtResource("1_cre1c")
-name = "Double day length"
-description = "One time purchase. Choose wisely!"
+name = "Double day length (Limit: 3)"
+description = ""
 base_cost = 1.0
 currency = 1
-max_purchases = 1
+max_purchases = 3
 effect_id = "double_day_length"
 value = 2.0
 times_purchased = 0

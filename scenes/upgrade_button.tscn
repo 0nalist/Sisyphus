@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dr47827icsavk"]
 
-[ext_resource type="Script" uid="uid://chg44jnnwluqs" path="res://upgrade_button.gd" id="1_feo8w"]
-[ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://sisyphus_theme.tres" id="1_gwg2v"]
+[ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://assets/sisyphus_theme.tres" id="1_mdhk6"]
+[ext_resource type="Script" uid="uid://chg44jnnwluqs" path="res://scripts/upgrade_button.gd" id="2_isks0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcpy1"]
 bg_color = Color(0, 0, 0, 1)
@@ -15,9 +15,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_gwg2v")
+theme = ExtResource("1_mdhk6")
 theme_override_styles/panel = SubResource("StyleBoxFlat_lcpy1")
-script = ExtResource("1_feo8w")
+script = ExtResource("2_isks0")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -28,7 +28,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="UpgradeContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme = ExtResource("1_gwg2v")
+theme = ExtResource("1_mdhk6")
 
 [node name="UpgradeLabel" type="Label" parent="MarginContainer/UpgradeContainer"]
 unique_name_in_owner = true

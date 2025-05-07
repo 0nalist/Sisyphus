@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c0a0x308p8rhc"
-path="res://.godot/imported/GALSB.ttf-d04f9162e6d6568f76f0bb9c8d4ed75d.fontdata"
+path="res://.godot/imported/GALSB.ttf-bc3079549a053f6c9f4c277668e07b94.fontdata"
 
 [deps]
 
-source_file="res://GALSB.ttf"
-dest_files=["res://.godot/imported/GALSB.ttf-d04f9162e6d6568f76f0bb9c8d4ed75d.fontdata"]
+source_file="res://assets/GALSB.ttf"
+dest_files=["res://.godot/imported/GALSB.ttf-bc3079549a053f6c9f4c277668e07b94.fontdata"]
 
 [params]
 

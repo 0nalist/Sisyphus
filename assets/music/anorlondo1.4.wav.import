@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://davcrj4j8mvlv"
-path="res://.godot/imported/anorlondo1.4.wav-440c29d2012f93ca7e42e7556720ad41.sample"
+path="res://.godot/imported/anorlondo1.4.wav-2b9f6d0019b2140a2139dd9b5033743b.sample"
 
 [deps]
 
-source_file="res://anorlondo1.4.wav"
-dest_files=["res://.godot/imported/anorlondo1.4.wav-440c29d2012f93ca7e42e7556720ad41.sample"]
+source_file="res://assets/music/anorlondo1.4.wav"
+dest_files=["res://.godot/imported/anorlondo1.4.wav-2b9f6d0019b2140a2139dd9b5033743b.sample"]
 
 [params]
 

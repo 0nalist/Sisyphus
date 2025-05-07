@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://diwk0tlamcmlv"]
 
-[ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://sisyphus_theme.tres" id="1_67dcx"]
-[ext_resource type="Script" uid="uid://b0tp4ixu23g0e" path="res://day_end.gd" id="1_bgweu"]
+[ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://assets/sisyphus_theme.tres" id="1_67dcx"]
+[ext_resource type="Script" uid="uid://b0tp4ixu23g0e" path="res://scripts/day_end.gd" id="1_bgweu"]
 
 [sub_resource type="Gradient" id="Gradient_67dcx"]
 offsets = PackedFloat32Array(0, 0.569767, 1)

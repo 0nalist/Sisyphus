@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://cp815mpgfya5x"]
 
-[ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://sisyphus_theme.tres" id="1_0ed4t"]
-[ext_resource type="Script" uid="uid://csfc7r40xa3il" path="res://upgrade_shop.gd" id="1_mxpyc"]
-[ext_resource type="PackedScene" uid="uid://dr47827icsavk" path="res://upgrade_button.tscn" id="3_0lay5"]
-[ext_resource type="Texture2D" uid="uid://w7y8qtxulwaf" path="res://greek_wave.png" id="4_pacmv"]
+[ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://assets/sisyphus_theme.tres" id="1_0ed4t"]
+[ext_resource type="Script" uid="uid://csfc7r40xa3il" path="res://scripts/upgrade_shop.gd" id="1_mxpyc"]
+[ext_resource type="PackedScene" uid="uid://dr47827icsavk" path="res://scenes/upgrade_button.tscn" id="3_0lay5"]
+[ext_resource type="Texture2D" uid="uid://w7y8qtxulwaf" path="res://assets/greek_wave.png" id="4_pacmv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ed4t"]
 bg_color = Color(0.878431, 0.431373, 0.0156863, 1)

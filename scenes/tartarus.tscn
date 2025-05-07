@@ -1,13 +1,12 @@
 [gd_scene load_steps=14 format=3 uid="uid://ctc4gpjpk1de3"]
 
-[ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://sisyphus_theme.tres" id="1_ktc57"]
-[ext_resource type="Script" uid="uid://02c1xmwyeepc" path="res://tartarus.gd" id="1_ss6v2"]
-[ext_resource type="PackedScene" uid="uid://cp815mpgfya5x" path="res://upgrade_shop.tscn" id="3_ljron"]
-[ext_resource type="Texture2D" uid="uid://cc0kefcx8umps" path="res://sisyphusStockImg.jpg" id="3_rmx4a"]
-[ext_resource type="PackedScene" uid="uid://diwk0tlamcmlv" path="res://day_end.tscn" id="4_70rlu"]
-[ext_resource type="Texture2D" uid="uid://w7y8qtxulwaf" path="res://greek_wave.png" id="5_1ged7"]
-[ext_resource type="Texture2D" uid="uid://b6n1157thj4hg" path="res://sisyphus_cutout.png" id="5_ustnh"]
-[ext_resource type="AudioStream" uid="uid://davcrj4j8mvlv" path="res://anorlondo1.4.wav" id="8_8ubw0"]
+[ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://assets/sisyphus_theme.tres" id="1_ktc57"]
+[ext_resource type="Script" uid="uid://02c1xmwyeepc" path="res://scripts/tartarus.gd" id="1_ss6v2"]
+[ext_resource type="PackedScene" uid="uid://cp815mpgfya5x" path="res://scenes/upgrade_shop.tscn" id="3_ljron"]
+[ext_resource type="PackedScene" uid="uid://diwk0tlamcmlv" path="res://scenes/day_end.tscn" id="4_70rlu"]
+[ext_resource type="Texture2D" uid="uid://w7y8qtxulwaf" path="res://assets/greek_wave.png" id="5_1ged7"]
+[ext_resource type="Texture2D" uid="uid://b6n1157thj4hg" path="res://assets/sisyphus_cutout.png" id="5_ustnh"]
+[ext_resource type="AudioStream" uid="uid://davcrj4j8mvlv" path="res://assets/music/anorlondo1.4.wav" id="8_8ubw0"]
 
 [sub_resource type="Animation" id="Animation_8ubw0"]
 length = 0.001
@@ -52,6 +51,8 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y2o57"]
 bg_color = Color(0.6, 0.819608, 0.482353, 1)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1ged7"]
+
 [node name="Tartarus" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -95,7 +96,6 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_y2o57")
 }
-autoplay = "roll"
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -219,7 +219,7 @@ mouse_filter = 1
 
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("3_rmx4a")
+texture = SubResource("CompressedTexture2D_1ged7")
 expand_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
