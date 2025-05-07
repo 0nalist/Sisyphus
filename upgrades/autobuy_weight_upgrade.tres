@@ -11,5 +11,6 @@ currency = 0
 max_purchases = 1
 effect_id = "enable_autobuy_weight"
 value = 1.0
+permanent = true
 times_purchased = 0
 metadata/_custom_type_script = "uid://b8qbm4u3q4vhy"

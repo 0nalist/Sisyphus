@@ -84,7 +84,7 @@ func update_ui() -> void:
 		button.refresh()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	%Parallax2D.autoscroll.x = 4
 	%Parallax2D2.autoscroll.x = -4
 

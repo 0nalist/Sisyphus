@@ -93,7 +93,6 @@ repeat_size = Vector2(1920, 0)
 repeat_times = 9
 
 [node name="GreekWave" type="Sprite2D" parent="Parallax2D2"]
-scale = Vector2(1, 1)
 texture = ExtResource("5_1ged7")
 
 [node name="SisyphusStockImg" type="Sprite2D" parent="."]
@@ -258,7 +257,7 @@ horizontal_alignment = 2
 [node name="SummitLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "+2% Strength/Second every Ascent"
+tooltip_text = "+1% Strength/Second^Ascents"
 mouse_filter = 1
 text = "Ascents"
 horizontal_alignment = 2
@@ -324,7 +323,16 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 10
 focus_mode = 0
-text = "Autoreflect"
+text = "AutoReflect"
+
+[node name="AutoAscendCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 10
+focus_mode = 0
+text = "AutoAscend"
 
 [node name="MusicButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -352,4 +360,5 @@ position = Vector2(576, 324)
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/WeightButton" to="." method="_on_weight_button_pressed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/AutobuyWeightCheckBox" to="." method="_on_autobuy_weight_check_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/AutoreflectCheckBox" to="." method="_on_autoreflect_check_box_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/AutoAscendCheckBox" to="." method="_on_auto_ascend_check_box_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/MusicButton" to="." method="_on_music_button_toggled"]

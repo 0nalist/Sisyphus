@@ -18,10 +18,11 @@ func setup(upg: Upgrade, tart: Node, shop_ref: Node):
 	if not button.is_connected("pressed", _on_upgrade_button_pressed):
 		button.pressed.connect(_on_upgrade_button_pressed)
 
-	label.text = "%s\nCost: %.2f %s" % [
+	label.text = "%s\nCost: %.2f %s%s" % [
 		upgrade.name,
 		scaled_cost,
-		"Meaning" if upgrade.currency == Upgrade.CurrencyType.MEANING else "Happiness"
+		"Meaning" if upgrade.currency == Upgrade.CurrencyType.MEANING else "Happiness",
+		"\n(Permanent)" if upgrade.permanent else ""
 	]
 
 
@@ -65,8 +66,9 @@ func refresh():
 	var scaled_cost = upgrade.get_scaled_cost()
 	button.disabled = not _can_afford(scaled_cost) or not _can_buy_more()
 
-	label.text = "%s\nCost: %.2f %s" % [
+	label.text = "%s\nCost: %.2f %s%s" % [
 		upgrade.name,
 		scaled_cost,
-		"Meaning" if upgrade.currency == Upgrade.CurrencyType.MEANING else "Happiness"
+		"Meaning" if upgrade.currency == Upgrade.CurrencyType.MEANING else "Happiness",
+		"\n(Permanent)" if upgrade.permanent else ""
 	]

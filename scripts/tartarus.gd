@@ -81,10 +81,10 @@ var upgrade_effects = {
 }
 
 const MOUNTAIN_NAMES = [
-	"Orvilos", "Erymanthos", "Falakro (Profitis Ilias)", "Vasilitsa", "Athamanika", "Lakmos",
-	"Tymfristos (Velouchi)", "Varnous", "Sternes", "Svourichti", "Aroania (Chelmos)", "Bournelos", "Gavala",
-	"Kyllini", "Thodoris", "Mesa Soros", "Trocharis", "Taygetus (Profitis Ilias)", "Pachnes", "Timios Stavros",
-	"Parnassus", "Vardousia (Korakas)", "Tymfi", "Giona", "Gramos", "Kaimaktsalan", "Smolikas", "Olympus"
+	"Orvilos", "Erymanthos", "Falakro", "Vasilitsa", "Athamanika", "Lakmos",
+	"Tymfristos", "Varnous", "Sternes", "Svourichti", "Aroania", "Bournelos", "Gavala",
+	"Kyllini", "Thodoris", "Mesa Soros", "Trocharis", "Taygetus", "Pachnes", "Timios Stavros",
+	"Parnassus", "Vardousia", "Tymfi", "Giona", "Gramos", "Kaimaktsalan", "Smolikas", "Olympus"
 ]
 
 
@@ -121,7 +121,7 @@ func _ready() -> void:
 	timer.timeout.connect(_on_timer_timeout)
 
 func _on_timer_timeout():
-	var percent_increase = (summits * 2) / 100.0
+	var percent_increase = (summits) / 100.0
 	strength += strength * percent_increase
 
 
@@ -281,6 +281,8 @@ func _reset_progress(preserve_happiness: bool = false) -> void:
 	strength_gain = 0.1
 	weight_gain = 0.1
 
+	##Commenting out to make autobuys permanent
+	'''
 	autobuy_strength_enabled = false
 	autobuy_weight_enabled = false
 	autobuy_strength_check_box.visible = false
@@ -289,11 +291,12 @@ func _reset_progress(preserve_happiness: bool = false) -> void:
 	autobuy_weight_check_box.button_pressed = false
 	autoreflect_check_box.visible = false
 	autoreflect_check_box.button_pressed = false
-	
+	'''
 	## Reset upgrades
 	for upgrade in upgrades_to_reset:
 		if upgrade is Upgrade:
-			upgrade.times_purchased = 0
+			if not upgrade.permanent:
+				upgrade.times_purchased = 0
 
 func _on_shop_closed() -> void:
 	is_in_shop = false
@@ -364,3 +367,7 @@ func _on_autobuy_weight_check_box_toggled(toggled_on: bool) -> void:
 
 func _on_autoreflect_check_box_toggled(toggled_on: bool) -> void:
 	autoreflect_enabled = toggled_on
+
+
+func _on_auto_ascend_check_box_toggled(toggled_on: bool) -> void:
+	pass # Replace with function body.
