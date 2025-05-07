@@ -40,7 +40,7 @@ var upgrades_to_reset: Array[Upgrade] = []
 var selected_purchase_amount: String = "1"
 
 var boulder_weight: float = 1.0
-var summit_height: float = 32
+var summit_height: int = 32
 var progress: float = 0.0
 
 var strength: float = 1.0
@@ -316,6 +316,7 @@ func get_day_duration() -> float:
 		day_duration
 		+ get_day_length_bonus("add_day_seconds_temp")
 		+ get_day_length_bonus("add_day_seconds_perm")
+		* get_day_length_bonus("double_day_length")
 	)
 
 func get_day_length_bonus(effect_id: String) -> float:
