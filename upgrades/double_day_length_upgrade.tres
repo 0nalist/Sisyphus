@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_cre1c")
-name = "Double day length (Limit: 3)"
+name = "Double day length"
 description = ""
 base_cost = 1.0
 currency = 1

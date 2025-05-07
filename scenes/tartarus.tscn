@@ -77,13 +77,22 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.878431, 0.431373, 0.0156863, 1)
 
-[node name="GreekWave2" type="Sprite2D" parent="."]
+[node name="Parallax2D" type="Parallax2D" parent="."]
+unique_name_in_owner = true
+repeat_size = Vector2(1920, 0)
+
+[node name="GreekWave2" type="Sprite2D" parent="Parallax2D"]
 position = Vector2(647, 30)
 texture = ExtResource("5_1ged7")
 
-[node name="GreekWave" type="Sprite2D" parent="."]
-position = Vector2(633, 574)
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+unique_name_in_owner = true
 rotation = -0.39968
+repeat_size = Vector2(1920, 0)
+
+[node name="GreekWave" type="Sprite2D" parent="Parallax2D2"]
+position = Vector2(600.691, 772.639)
+scale = Vector2(1, 1)
 texture = ExtResource("5_1ged7")
 
 [node name="SisyphusStockImg" type="Sprite2D" parent="."]
@@ -232,18 +241,24 @@ theme_override_constants/separation = 12
 [node name="MeaningLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "Resets every day. Extra is converted into happiness when you ascend"
+mouse_filter = 1
 text = "Meaning"
 horizontal_alignment = 2
 
 [node name="HappinessLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "Fleeting, but also everlasting"
+mouse_filter = 1
 text = "Happiness"
 horizontal_alignment = 2
 
 [node name="SummitLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "+2% Strength/Second every Ascent"
+mouse_filter = 1
 text = "Ascents"
 horizontal_alignment = 2
 
@@ -307,6 +322,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 10
+focus_mode = 0
 text = "Autoreflect"
 
 [node name="MusicButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
@@ -321,6 +337,10 @@ text = "music"
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/MusicButton"]
 unique_name_in_owner = true
 stream = ExtResource("8_8ubw0")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true
 
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/PurchaseAmountDropdown" to="." method="_on_purchase_amount_dropdown_item_selected"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StrengthButton" to="." method="_on_strength_button_pressed"]

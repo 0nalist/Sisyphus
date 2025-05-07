@@ -32,6 +32,11 @@ func _ready() -> void:
 func setup(tartarus: Node) -> void:
 	print("setting up")
 	tartarus_ref = tartarus
+
+	# Pass upgrades to tartarus so it can reset them on ascend
+	if tartarus_ref.has_method("set_upgrades_to_reset"):
+		tartarus_ref.set_upgrades_to_reset(upgrade_resources)
+
 	_load_upgrades()
 	update_ui()
 
@@ -77,39 +82,11 @@ func update_ui() -> void:
 
 	for button in upgrade_buttons:
 		button.refresh()
-'''
-	# Strength gain
-	strength_gain_button.text = "+0.05 Strength per Suffering\nCost: 1 Meaning"
-	strength_gain_button.disabled = tartarus_ref.meaning < 1
 
-	# Strength cost reduction
-	strength_cost_button.text = "-10% Strength Cost\nCost: 1 Meaning"
-	strength_cost_button.disabled = tartarus_ref.meaning < 1
 
-	# Weight gain
-	weight_gain_button.text = "+0.05 Weight per Strength\nCost: 1 Meaning"
-	weight_gain_button.disabled = tartarus_ref.meaning < 1
-
-	# Weight cost reduction
-	weight_cost_button.text = "-10% Weight Cost\nCost: 1 Meaning"
-	weight_cost_button.disabled = tartarus_ref.meaning < 1
-
-	# Autobuy strength
-	if tartarus_ref.autobuy_strength_enabled:
-		autobuy_strength_button.text = "Autobuy Strength\n✓ Purchased"
-		autobuy_strength_button.disabled = true
-	else:
-		autobuy_strength_button.text = "Enable Autobuy Strength\nCost: 100 Happiness"
-		autobuy_strength_button.disabled = tartarus_ref.happiness < 100
-
-	# Autobuy weight
-	if tartarus_ref.autobuy_weight_enabled:
-		autobuy_weight_button.text = "Autobuy Weight\n✓ Purchased"
-		autobuy_weight_button.disabled = true
-	else:
-		autobuy_weight_button.text = "Enable Autobuy Weight\nCost: 100 Happiness"
-		autobuy_weight_button.disabled = tartarus_ref.happiness < 100
-'''
+func _process(delta: float) -> void:
+	%Parallax2D.autoscroll.x = 4
+	%Parallax2D2.autoscroll.x = -4
 
 func _on_strength_upgrade_button_pressed() -> void:
 	if tartarus_ref.meaning >= 10:

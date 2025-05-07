@@ -9,6 +9,9 @@ var autobuy_strength_enabled := false
 var autobuy_weight_enabled := false
 var autoreflect_enabled := false
 
+var upgrades_to_reset: Array[Upgrade] = []
+
+
 @onready var progress_bar: ProgressBar = %ProgressBar
 @onready var suffering_label: Label = %SufferingLabel
 @onready var strength_label: Label = %StrengthLabel
@@ -44,7 +47,7 @@ var strength: float = 1.0
 
 var suffering: float = 0.0
 var meaning: float = 0.0
-var happiness: float = 2.0
+var happiness: float = 0.0
 var summits: int = 0
 
 # --- Upgradeable Economy Variables ---
@@ -95,7 +98,7 @@ func get_current_mountain_name() -> String:
 @export var day_duration: float = 10.0  # seconds to summit or fail
 var day_timer: float = 0.0
 var day_count: int = 1
-
+@onready var timer: Timer = %Timer
 
 func _ready() -> void:
 	purchase_amount_dropdown.add_item("1")
@@ -112,6 +115,15 @@ func _ready() -> void:
 	autoreflect_check_box.hide()
 	autobuy_strength_check_box.hide()
 	autobuy_weight_check_box.hide()
+	
+	timer.wait_time = 1.0
+	timer.autostart = true
+	timer.timeout.connect(_on_timer_timeout)
+
+func _on_timer_timeout():
+	var percent_increase = (summits * 2) / 100.0
+	strength += strength * percent_increase
+
 
 func _process(delta: float) -> void:
 	if is_in_shop:
@@ -137,6 +149,11 @@ func _process(delta: float) -> void:
 
 	# Update UI
 	progress_bar.value = progress / summit_height * 100.0
+
+	%Parallax2D.autoscroll.x = -strength/boulder_weight
+	%Parallax2D2.autoscroll.x = -strength/boulder_weight
+	
+	
 
 	suffering_label.text = "Suffering: " + ("%.2f" % suffering)
 	boulder_weight_label.text = "Weight: " + ("%.2f" % boulder_weight)
@@ -271,15 +288,13 @@ func _reset_progress(preserve_happiness: bool = false) -> void:
 	autobuy_weight_check_box.visible = false
 	autobuy_strength_check_box.button_pressed = false
 	autobuy_weight_check_box.button_pressed = false
+	autoreflect_check_box.visible = false
+	autoreflect_check_box.button_pressed = false
 	
 	## Reset upgrades
-	var dir := DirAccess.open("res://upgrades/")
-	if dir:
-		for file in dir.get_files():
-			if file.ends_with(".tres"):
-				var upgrade: Upgrade = load("res://upgrades/" + file)
-				if upgrade is Upgrade:
-					upgrade.times_purchased = 0
+	for upgrade in upgrades_to_reset:
+		if upgrade is Upgrade:
+			upgrade.times_purchased = 0
 
 func _on_shop_closed() -> void:
 	is_in_shop = false
@@ -301,7 +316,11 @@ func get_purchase_units(affordable: int) -> int:
 		_: return 1
 
 
-
+func set_upgrades_to_reset(resources: Array[Resource]) -> void:
+	upgrades_to_reset.clear()
+	for res in resources:
+		if res is Upgrade:
+			upgrades_to_reset.append(res as Upgrade)
 
 func _on_strength_button_pressed() -> void:
 	var affordable_units = get_affordable_strength_units()

@@ -42,27 +42,33 @@ mouse_filter = 1
 theme = ExtResource("1_0ed4t")
 theme_override_styles/panel = SubResource("StyleBoxFlat_0ed4t")
 
-[node name="GreekWave" type="TextureRect" parent="."]
-layout_mode = 1
+[node name="Parallax2D" type="Parallax2D" parent="."]
+unique_name_in_owner = true
+repeat_size = Vector2(1920, 0)
+
+[node name="GreekWave" type="TextureRect" parent="Parallax2D"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -960.0
-offset_top = -64.0
-offset_right = 960.0
+offset_right = 1920.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("4_pacmv")
 
-[node name="GreekWave2" type="TextureRect" parent="."]
-layout_mode = 1
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+unique_name_in_owner = true
+scroll_offset = Vector2(1925, 585)
+repeat_size = Vector2(1920, 0)
+
+[node name="GreekWave2" type="TextureRect" parent="Parallax2D2"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -960.0
-offset_right = 960.0
+offset_left = -384.0
+offset_right = 1536.0
 offset_bottom = 64.0
 grow_horizontal = 2
 texture = ExtResource("4_pacmv")
@@ -83,13 +89,17 @@ theme_override_constants/margin_bottom = 50
 layout_mode = 2
 size_flags_vertical = 4
 
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+
 [node name="ShopLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 48
 text = "Meditations"
 
-[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer"]
+[node name="Control5" type="Control" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(50, 25)
 layout_mode = 2
 
