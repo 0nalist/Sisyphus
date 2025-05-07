@@ -61,21 +61,22 @@ layout_mode = 2
 
 [node name="ContinueButton" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 text = " Reflect "
 
+[node name="AscendButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Tomorrow, a taller mountain
+[Ascend]"
+
 [node name="Control2" type="Control" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-
-[node name="DoubleMountainButton" type="Button" parent="VBoxContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-focus_mode = 0
-text = "Tomorrow, a taller mountain"
+size_flags_vertical = 3
 
 [connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/AscendButton" to="." method="_on_ascend_button_pressed"]

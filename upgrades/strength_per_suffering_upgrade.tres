@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_8l2fv")
-name = "+0.05 Strength per Suffering"
+name = "+0.05 Strength Gain"
 description = ""
-base_cost = 1
+base_cost = 1.0
 currency = 0
 max_purchases = -1
 effect_id = "strength_gain_up"

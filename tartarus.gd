@@ -29,12 +29,14 @@ var autobuy_weight_enabled := false
 @onready var meaning_label: Label = %MeaningLabel
 @onready var happiness_label: Label = %HappinessLabel
 @onready var summit_label: Label = %SummitLabel
+@onready var mountain_heigh_label: Label = %MountainHeightLabel
+
 
 
 var selected_purchase_amount: String = "1"
 
 var boulder_weight: float = 1.0
-var summit_height: float = 10000
+var summit_height: float = 10
 var progress: float = 0.0
 
 var strength: float = 1.0
@@ -63,10 +65,25 @@ var upgrade_effects = {
 		#if not day_length_mult_purchased:
 		day_duration *= value,
 		#	day_length_mult_purchased = true,
-	"enable_autobuy_strength": func(_value): autobuy_strength_enabled = true,
-	"enable_autobuy_weight": func(_value): autobuy_weight_enabled = true,
+	"enable_autobuy_strength": func(_value):
+		autobuy_strength_enabled = true
+		autobuy_strength_check_box.visible = true,
+
+	"enable_autobuy_weight": func(_value):
+		autobuy_weight_enabled = true
+		autobuy_weight_check_box.visible = true,
 }
 
+const MOUNTAIN_NAMES = [
+	"Orvilos", "Erymanthos", "Falakro (Profitis Ilias)", "Vasilitsa", "Athamanika", "Lakmos",
+	"Tymfristos (Velouchi)", "Varnous", "Sternes", "Svourichti", "Aroania (Chelmos)", "Bournelos", "Gavala",
+	"Kyllini", "Thodoris", "Mesa Soros", "Trocharis", "Taygetus (Profitis Ilias)", "Pachnes", "Timios Stavros",
+	"Parnassus", "Vardousia (Korakas)", "Tymfi", "Giona", "Gramos", "Kaimaktsalan", "Smolikas", "Olympus"
+]
+
+
+func get_current_mountain_name() -> String:
+	return "Mount " + MOUNTAIN_NAMES[min(summits, MOUNTAIN_NAMES.size() - 1)]
 
 
 
@@ -87,6 +104,8 @@ func _ready() -> void:
 	autobuy_strength_check_box.button_pressed = autobuy_strength_enabled
 	autobuy_weight_check_box.button_pressed = autobuy_weight_enabled
 	
+	update_mountain_height_label()
+
 func _process(delta: float) -> void:
 	if is_in_shop:
 		%AnimationPlayer.stop()
@@ -97,14 +116,14 @@ func _process(delta: float) -> void:
 	progress += strength/boulder_weight * delta
 
 	var projected_meaning = suffering * (meaning_conversion_rate if progress >= summit_height else reduced_meaning_rate)
-	meaning_label.text = "Meaning: %.2f \n(%.2f banked + %.2f projected)" % [
+	meaning_label.text = "%.2f Meaning \n(%.2f banked + %.2f projected)" % [
 		meaning + projected_meaning,
 		meaning,
 		projected_meaning
-	]
+	] 
 	
-	happiness_label.text = "Happiness: %.2f" % happiness
-	summit_label.text = "Summits: %d" % summits
+	happiness_label.text = "%.2f Happiness" % happiness
+	summit_label.text = "%d Ascents" % summits
 	
 	# Advance the day timer
 	day_timer += delta
@@ -172,7 +191,9 @@ func autobuy():
 			strength = max(strength, 0.0)
 
 
-
+func update_mountain_height_label():
+	%MountainNameLabel.text = get_current_mountain_name()
+	%MountainHeightLabel.text = str(summit_height) + "m"
 
 func _handle_end_of_day(success: bool) -> void:
 	var meaning_gain = suffering * (meaning_conversion_rate if success else reduced_meaning_rate)
@@ -190,7 +211,7 @@ func _handle_end_of_day(success: bool) -> void:
 	var progress_percent = (progress / summit_height) * 100.0
 	result_popup.setup(progress_percent, success)
 	result_popup.continue_pressed.connect(_on_end_of_day_result_closed)
-
+	result_popup.ascend_pressed.connect(_on_ascend_pressed)
 	# Reset day progress
 	progress = 0.0
 	suffering = 0.0
@@ -206,6 +227,45 @@ func _on_end_of_day_result_closed() -> void:
 	shop.setup(self)
 	shop.shop_closed.connect(_on_shop_closed)
 
+func _on_ascend_pressed() -> void:
+	summit_height *= 2
+	_reset_progress(true)
+	
+	is_in_shop = false
+	update_mountain_height_label()
+
+func _reset_progress(preserve_happiness: bool = false) -> void:
+	progress = 0.0
+	suffering = 0.0
+	boulder_weight = 1.0
+	strength = 1.0
+	day_timer = 0.0
+	day_count = 1
+
+	meaning = 0.0
+	if not preserve_happiness:
+		happiness = 0.0
+
+	strength_cost = 1.0
+	weight_cost = 1.0
+	strength_gain = 0.1
+	weight_gain = 0.1
+
+	autobuy_strength_enabled = false
+	autobuy_weight_enabled = false
+	autobuy_strength_check_box.visible = false
+	autobuy_weight_check_box.visible = false
+	autobuy_strength_check_box.button_pressed = false
+	autobuy_weight_check_box.button_pressed = false
+	
+	## Reset upgrades
+	var dir := DirAccess.open("res://upgrades/")
+	if dir:
+		for file in dir.get_files():
+			if file.ends_with(".tres"):
+				var upgrade: Upgrade = load("res://upgrades/" + file)
+				if upgrade is Upgrade:
+					upgrade.times_purchased = 0
 
 func _on_shop_closed() -> void:
 	is_in_shop = false

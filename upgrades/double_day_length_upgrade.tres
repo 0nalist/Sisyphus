@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_cre1c")
 name = "Double day length"
-description = ""
-base_cost = 1
+description = "One time purchase. Choose wisely!"
+base_cost = 1.0
 currency = 1
 max_purchases = 1
 effect_id = "double_day_length"

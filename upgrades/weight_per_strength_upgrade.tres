@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_10x4y")
-name = "+0.05 Weight per Strength"
+name = "+0.05 Weight Gain"
 description = ""
-base_cost = 1
+base_cost = 1.0
 currency = 0
 max_purchases = -1
 effect_id = "weight_gain_up"

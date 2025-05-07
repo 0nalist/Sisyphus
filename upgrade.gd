@@ -44,5 +44,5 @@ func purchase(player_node: Node) -> bool:
 	return true
 
 func get_scaled_cost() -> float:
-	var raw_cost = base_cost * pow(1.1, times_purchased)
+	var raw_cost = base_cost * pow(1.4, times_purchased)
 	return round(raw_cost * 100.0) / 100.0

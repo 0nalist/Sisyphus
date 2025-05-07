@@ -6,7 +6,7 @@
 script = ExtResource("1_tk8fb")
 name = "Enable Autobuy Weight"
 description = ""
-base_cost = 100.0
+base_cost = 1.0
 currency = 0
 max_purchases = 1
 effect_id = "enable_autobuy_weight"

@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://bx6nnvros30r3"]
 
-[ext_resource type="Script" uid="uid://b8qbm4u3q4vhy" path="res://upgrade.gd" id="1_18bmk"]
+[ext_resource type="Script" uid="uid://b8qbm4u3q4vhy" path="res://upgrade.gd" id="1_yfpom"]
 
 [resource]
-script = ExtResource("1_18bmk")
+script = ExtResource("1_yfpom")
 name = "Enable Autobuy Strength"
 description = ""
-base_cost = 10
+base_cost = 1.0
 currency = 0
 max_purchases = 1
 effect_id = "enable_autobuy_strength"
