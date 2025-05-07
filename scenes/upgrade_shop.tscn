@@ -32,7 +32,7 @@ size_flags_vertical = 3
 theme = ExtResource("1_0ed4t")
 script = ExtResource("1_mxpyc")
 upgrade_button_scene = ExtResource("3_0lay5")
-upgrade_resources = Array[Resource]([ExtResource("4_q1psx"), ExtResource("5_8goot"), ExtResource("12_8goot"), ExtResource("13_gc2o6"), ExtResource("11_57m7w"), ExtResource("10_3r51h"), ExtResource("9_ojws6"), ExtResource("7_jbnth"), ExtResource("8_3xpl5"), ExtResource("13_jbnth"), ExtResource("6_gc2o6"), ExtResource("15_3xpl5")])
+upgrade_resources = Array[Resource]([ExtResource("4_q1psx"), ExtResource("5_8goot"), ExtResource("12_8goot"), ExtResource("13_gc2o6"), ExtResource("11_57m7w"), ExtResource("10_3r51h"), ExtResource("7_jbnth"), ExtResource("9_ojws6"), ExtResource("8_3xpl5"), ExtResource("13_jbnth"), ExtResource("6_gc2o6"), ExtResource("15_3xpl5")])
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -103,7 +103,7 @@ theme_override_font_sizes/font_size = 48
 text = "Meditations"
 
 [node name="Control5" type="Control" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(50, 25)
+custom_minimum_size = Vector2(50, 8)
 layout_mode = 2
 
 [node name="LabelContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -173,7 +173,7 @@ visible = false
 layout_mode = 2
 
 [node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(50, 25)
+custom_minimum_size = Vector2(50, 8)
 layout_mode = 2
 
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]

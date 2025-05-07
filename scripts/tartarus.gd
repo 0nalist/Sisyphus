@@ -11,7 +11,7 @@ var autoreflect_enabled := false
 var autoascend_enabled := false
 
 var upgrades_to_reset: Array[Upgrade] = []
-
+var all_upgrades: Array[Upgrade] = []
 
 @onready var progress_bar: ProgressBar = %ProgressBar
 @onready var suffering_label: Label = %SufferingLabel
@@ -71,7 +71,7 @@ var upgrade_effects = {
 	"weight_gain_up": func(value): weight_gain += value,
 	"weight_cost_down": func(value): weight_cost *= (1.0 - value),
 	"add_day_seconds_temp": func(value): day_length_bonus_temporary += value,
-	"add_day_seconds_perm": func(value): day_length_bonus_permanent += value,
+	"add_day_seconds_permanent": func(value): day_length_bonus_permanent += value,
 	"double_day_length": func(value): 
 		#if not day_length_mult_purchased:
 		day_length_bonus_permanent *= value
@@ -335,19 +335,17 @@ func _on_shop_closed() -> void:
 	is_in_shop = false
 
 func get_day_duration() -> float:
-	return (
-		day_duration
-		+ get_day_length_bonus("add_day_seconds_temp")
-		+ get_day_length_bonus("add_day_seconds_perm")
-		* get_day_length_bonus("double_day_length")
-	)
+	var base := day_duration + get_day_length_bonus("add_day_seconds_temp") + get_day_length_bonus("add_day_seconds_permanent")
+	var multiplier := 1.0 + get_day_length_bonus("double_day_length")  # e.g. value 1.0 means double
+	return base * multiplier
 
 func get_day_length_bonus(effect_id: String) -> float:
 	var total := 0.0
-	for upgrade in upgrades_to_reset:
+	for upgrade in all_upgrades:
 		if upgrade.effect_id == effect_id:
 			total += upgrade.value * upgrade.times_purchased
 	return total
+
 
 func get_affordable_strength_units() -> int:
 	return floor(suffering / strength_cost)
@@ -367,9 +365,12 @@ func get_purchase_units(affordable: int) -> int:
 
 func set_upgrades_to_reset(resources: Array[Resource]) -> void:
 	upgrades_to_reset.clear()
+	all_upgrades.clear()
 	for res in resources:
 		if res is Upgrade:
-			upgrades_to_reset.append(res as Upgrade)
+			all_upgrades.append(res)
+			if not res.permanent:
+				upgrades_to_reset.append(res)
 
 func _on_strength_button_pressed() -> void:
 	var affordable_units = get_affordable_strength_units()

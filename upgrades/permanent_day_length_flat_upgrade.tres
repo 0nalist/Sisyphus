@@ -6,10 +6,10 @@
 script = ExtResource("1_r2iff")
 name = "+5 Seconds per Day"
 description = ""
-base_cost = 10.0
+base_cost = 8.0
 currency = 0
 max_purchases = -1
-effect_id = "add_day_seconds_perm"
+effect_id = "add_day_seconds_permanent"
 value = 5.0
 permanent = true
 times_purchased = 0
