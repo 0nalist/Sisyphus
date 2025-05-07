@@ -257,7 +257,7 @@ horizontal_alignment = 2
 [node name="SummitLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "+1% Strength/Second^Ascents"
+tooltip_text = "+1%^Ascents Strength/Second"
 mouse_filter = 1
 text = "Ascents"
 horizontal_alignment = 2

@@ -50,6 +50,8 @@ var meaning: float = 0.0
 var happiness: float = 0.0
 var summits: int = 0
 
+var passive_meaning_rate := 0.0
+
 # --- Upgradeable Economy Variables ---
 @export var strength_cost: float = 1.0
 @export var weight_cost: float = 1.0
@@ -64,15 +66,17 @@ var upgrade_effects = {
 	"strength_cost_down": func(value): strength_cost *= (1.0 - value), # value = 0.1 means -10%
 	"weight_gain_up": func(value): weight_gain += value,
 	"weight_cost_down": func(value): weight_cost *= (1.0 - value),
-	"add_day_seconds": func(value): day_duration += value,
+	"add_day_seconds_temp": func(value): day_length_bonus_temporary += value,
+	"add_day_seconds_perm": func(value): day_length_bonus_permanent += value,
 	"double_day_length": func(value): 
 		#if not day_length_mult_purchased:
-		day_duration *= value,
+		day_length_bonus_permanent *= value
+		day_length_bonus_temporary *= value,
 		#	day_length_mult_purchased = true,
 	"enable_autobuy_strength": func(_value):
 		autobuy_strength_enabled = true
 		autobuy_strength_check_box.visible = true,
-
+	"meaning_per_second_up": func(value): passive_meaning_rate += value,
 	"enable_autobuy_weight": func(_value):
 		autobuy_weight_enabled = true
 		autobuy_weight_check_box.visible = true,
@@ -96,6 +100,8 @@ func get_current_mountain_name() -> String:
 
 # --- Time System ---
 @export var day_duration: float = 10.0  # seconds to summit or fail
+var day_length_bonus_temporary := 0.0
+var day_length_bonus_permanent := 0.0
 var day_timer: float = 0.0
 var day_count: int = 1
 @onready var timer: Timer = %Timer
@@ -133,7 +139,8 @@ func _process(delta: float) -> void:
 	# Accumulate suffering & progress
 	suffering += boulder_weight * delta
 	progress += strength/boulder_weight * delta
-
+	
+	meaning += passive_meaning_rate * delta
 	var projected_meaning = suffering * (meaning_conversion_rate if progress >= summit_height else reduced_meaning_rate)
 	meaning_label.text = "%.2f Meaning \n(%.2f banked + %.2f projected)" % [
 		meaning + projected_meaning,
@@ -157,7 +164,7 @@ func _process(delta: float) -> void:
 	suffering_label.text = "Suffering: " + ("%.2f" % suffering)
 	boulder_weight_label.text = "Weight: " + ("%.2f" % boulder_weight)
 	strength_label.text = "Strength: " + ("%.2f" % strength)
-	var time_left = max(day_duration - day_timer, 0.0)
+	var time_left = max(get_day_duration() - day_timer, 0.0)
 	day_label.text = "Day %d — %.1fs left" % [day_count, time_left]
 	speed_label.text = "Speed: " + ("%.2f" % (strength/boulder_weight)) + "m/s"
 	var strength_units = get_purchase_units(get_affordable_strength_units())
@@ -191,7 +198,7 @@ func _process(delta: float) -> void:
 		_handle_end_of_day(true)
 
 	# Failure condition
-	if day_timer >= day_duration:
+	if day_timer >= get_day_duration():
 		_handle_end_of_day(false)
 	
 	autobuy()
@@ -256,6 +263,7 @@ func _on_end_of_day_result_closed() -> void:
 	if autoreflect_enabled:
 		await get_tree().create_timer(0.2).timeout
 		shop.exit_button.emit_signal("pressed")
+	%Parallax2D2.scroll_offset = Vector2(1820,991)
 
 func _on_ascend_pressed() -> void:
 	summit_height *= 2
@@ -263,6 +271,7 @@ func _on_ascend_pressed() -> void:
 	
 	is_in_shop = false
 	update_mountain_height_label()
+	%Parallax2D2.scroll_offset = Vector2(1820,991)
 
 func _reset_progress(preserve_happiness: bool = false) -> void:
 	progress = 0.0
@@ -292,6 +301,7 @@ func _reset_progress(preserve_happiness: bool = false) -> void:
 	autoreflect_check_box.visible = false
 	autoreflect_check_box.button_pressed = false
 	'''
+	
 	## Reset upgrades
 	for upgrade in upgrades_to_reset:
 		if upgrade is Upgrade:
@@ -301,6 +311,19 @@ func _reset_progress(preserve_happiness: bool = false) -> void:
 func _on_shop_closed() -> void:
 	is_in_shop = false
 
+func get_day_duration() -> float:
+	return (
+		day_duration
+		+ get_day_length_bonus("add_day_seconds_temp")
+		+ get_day_length_bonus("add_day_seconds_perm")
+	)
+
+func get_day_length_bonus(effect_id: String) -> float:
+	var total := 0.0
+	for upgrade in upgrades_to_reset:
+		if upgrade.effect_id == effect_id:
+			total += upgrade.value * upgrade.times_purchased
+	return total
 
 func get_affordable_strength_units() -> int:
 	return floor(suffering / strength_cost)

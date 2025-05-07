@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_nk41f")
-name = "Automatically Reflect"
+name = "Enable AutoReflect"
 description = ""
 base_cost = 1.0
 currency = 1

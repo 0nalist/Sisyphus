@@ -4,13 +4,13 @@
 
 [resource]
 script = ExtResource("1_r2iff")
-name = ""
+name = "+5 Seconds per Day"
 description = ""
-base_cost = 1.0
+base_cost = 10.0
 currency = 0
 max_purchases = -1
-effect_id = ""
-value = 0.0
-permanent = false
+effect_id = "add_day_seconds_perm"
+value = 5.0
+permanent = true
 times_purchased = 0
 metadata/_custom_type_script = "uid://b8qbm4u3q4vhy"

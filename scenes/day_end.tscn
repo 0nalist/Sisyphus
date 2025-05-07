@@ -70,7 +70,9 @@ text = " Reflect "
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+tooltip_text = "Resets all meaning and non-permanent meditations"
 focus_mode = 0
+mouse_filter = 1
 text = "Tomorrow, a taller mountain
 [Ascend]"
 
