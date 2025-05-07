@@ -22,6 +22,7 @@ var upgrades_to_reset: Array[Upgrade] = []
 @onready var speed_label: Label = %SpeedLabel
 
 
+
 @onready var purchase_amount_dropdown: OptionButton = %PurchaseAmountDropdown
 
 @onready var autobuy_strength_check_box: CheckBox = %AutobuyStrengthCheckBox
@@ -35,7 +36,8 @@ var upgrades_to_reset: Array[Upgrade] = []
 @onready var summit_label: Label = %SummitLabel
 @onready var mountain_heigh_label: Label = %MountainHeightLabel
 
-
+@onready var playtime_label: Label = %PlaytimeLabel
+var total_playtime := 0.0
 
 var selected_purchase_amount: String = "1"
 
@@ -132,6 +134,15 @@ func _on_timer_timeout():
 
 
 func _process(delta: float) -> void:
+	total_playtime += delta
+	# Update label every 30 frames
+	if Engine.get_frames_drawn() % 30 == 0:
+		var hours = int(total_playtime) / 3600
+		var minutes = (int(total_playtime) % 3600) / 60
+		var seconds = int(total_playtime) % 60
+		playtime_label.text = "Playtime: %02d:%02d:%02d" % [hours, minutes, seconds]
+	
+	
 	if is_in_shop:
 		%AnimationPlayer.stop()
 		return
@@ -192,6 +203,7 @@ func _process(delta: float) -> void:
 	autobuy()
 	
 	
+
 	
 	# Success condition
 	if progress >= summit_height:
