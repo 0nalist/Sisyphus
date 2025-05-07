@@ -87,11 +87,12 @@ texture = ExtResource("5_1ged7")
 
 [node name="Parallax2D2" type="Parallax2D" parent="."]
 unique_name_in_owner = true
-rotation = -0.39968
+rotation = -0.464258
+scroll_offset = Vector2(1820, 991)
 repeat_size = Vector2(1920, 0)
+repeat_times = 9
 
 [node name="GreekWave" type="Sprite2D" parent="Parallax2D2"]
-position = Vector2(600.691, 772.639)
 scale = Vector2(1, 1)
 texture = ExtResource("5_1ged7")
 
@@ -341,6 +342,9 @@ stream = ExtResource("8_8ubw0")
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
 
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/PurchaseAmountDropdown" to="." method="_on_purchase_amount_dropdown_item_selected"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StrengthButton" to="." method="_on_strength_button_pressed"]

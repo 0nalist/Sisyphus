@@ -151,9 +151,8 @@ func _process(delta: float) -> void:
 	progress_bar.value = progress / summit_height * 100.0
 
 	%Parallax2D.autoscroll.x = -strength/boulder_weight
-	%Parallax2D2.autoscroll.x = -strength/boulder_weight
-	
-	
+	var scroll_speed = clamp(strength / boulder_weight, 0.1, 10.0)
+	%Parallax2D2.autoscroll = Vector2(2, -1) * -scroll_speed #* 100
 
 	suffering_label.text = "Suffering: " + ("%.2f" % suffering)
 	boulder_weight_label.text = "Weight: " + ("%.2f" % boulder_weight)

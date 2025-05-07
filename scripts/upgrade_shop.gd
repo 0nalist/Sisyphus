@@ -27,7 +27,7 @@ var upgrade_buttons := []
 
 func _ready() -> void:
 	print("🧪 upgrade_shop.gd ready called")
-
+	set_process(true)
 
 func setup(tartarus: Node) -> void:
 	print("setting up")
