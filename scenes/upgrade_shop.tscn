@@ -1,9 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://cp815mpgfya5x"]
+[gd_scene load_steps=14 format=3 uid="uid://cp815mpgfya5x"]
 
 [ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://assets/sisyphus_theme.tres" id="1_0ed4t"]
 [ext_resource type="Script" uid="uid://csfc7r40xa3il" path="res://scripts/upgrade_shop.gd" id="1_mxpyc"]
 [ext_resource type="PackedScene" uid="uid://dr47827icsavk" path="res://scenes/upgrade_button.tscn" id="3_0lay5"]
 [ext_resource type="Texture2D" uid="uid://w7y8qtxulwaf" path="res://assets/greek_wave.png" id="4_pacmv"]
+[ext_resource type="Resource" uid="uid://bx6nnvros30r3" path="res://upgrades/autobuy_strength_upgrade.tres" id="4_q1psx"]
+[ext_resource type="Resource" uid="uid://dgcolyhhop461" path="res://upgrades/autobuy_weight_upgrade.tres" id="5_8goot"]
+[ext_resource type="Resource" uid="uid://deaxcdfpqhaf3" path="res://upgrades/double_day_length_upgrade.tres" id="6_gc2o6"]
+[ext_resource type="Resource" uid="uid://d0cglcinilrib" path="res://upgrades/strength_cost_discount.tres" id="7_jbnth"]
+[ext_resource type="Resource" uid="uid://nbo6nji8qlbc" path="res://upgrades/weight_cost_discount.tres" id="8_3xpl5"]
+[ext_resource type="Resource" uid="uid://3c1jh5gaqbgg" path="res://upgrades/flat_day_length_upgrade.tres" id="9_ojws6"]
+[ext_resource type="Resource" uid="uid://yyt2iaasldag" path="res://upgrades/weight_per_strength_upgrade.tres" id="10_3r51h"]
+[ext_resource type="Resource" uid="uid://o8grqfqtvjav" path="res://upgrades/strength_per_suffering_upgrade.tres" id="11_57m7w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ed4t"]
 bg_color = Color(0.878431, 0.431373, 0.0156863, 1)
@@ -20,6 +28,7 @@ size_flags_vertical = 3
 theme = ExtResource("1_0ed4t")
 script = ExtResource("1_mxpyc")
 upgrade_button_scene = ExtResource("3_0lay5")
+upgrade_resources = Array[Resource]([ExtResource("4_q1psx"), ExtResource("5_8goot"), ExtResource("6_gc2o6"), ExtResource("11_57m7w"), ExtResource("10_3r51h"), ExtResource("9_ojws6"), ExtResource("7_jbnth"), ExtResource("8_3xpl5")])
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1

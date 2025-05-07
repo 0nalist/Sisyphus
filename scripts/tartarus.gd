@@ -36,7 +36,7 @@ var autobuy_weight_enabled := false
 var selected_purchase_amount: String = "1"
 
 var boulder_weight: float = 1.0
-var summit_height: float = 10
+var summit_height: float = 32
 var progress: float = 0.0
 
 var strength: float = 1.0

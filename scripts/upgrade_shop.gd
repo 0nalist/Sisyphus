@@ -3,10 +3,8 @@ extends Control
 signal shop_closed
 
 @export var upgrade_button_scene: PackedScene
-@export var upgrade_folder_path: String = "res://upgrades/"
+@export var upgrade_resources: Array[Resource] = []
 @onready var upgrade_container: GridContainer = %UpgradeContainer
-
-
 
 
 @onready var meaning_label: Label = %MeaningLabel
@@ -37,6 +35,16 @@ func setup(tartarus: Node) -> void:
 	_load_upgrades()
 	update_ui()
 
+
+func _load_upgrades():
+	for upgrade_res in upgrade_resources:
+		if upgrade_res is Upgrade:
+			print("✅ Loaded Upgrade: ", upgrade_res.name)
+			_add_upgrade_button(upgrade_res)
+		else:
+			print("⚠️ Skipped non-upgrade resource")
+
+''' ## LOADS FROM FOLDER, doesnt work in HTML
 func _load_upgrades():
 	print("🧪 Loading upgrades from: ", upgrade_folder_path)
 	var dir := DirAccess.open(upgrade_folder_path)
@@ -54,7 +62,7 @@ func _load_upgrades():
 				_add_upgrade_button(upgrade_res)
 			else:
 				print("⚠️ Not an Upgrade resource: ", path)
-
+'''
 
 func _add_upgrade_button(upgrade: Upgrade):
 	var button = upgrade_button_scene.instantiate()
