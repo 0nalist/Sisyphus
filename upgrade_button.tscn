@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://dr47827icsavk"]
+
+[ext_resource type="Script" uid="uid://chg44jnnwluqs" path="res://upgrade_button.gd" id="1_feo8w"]
+[ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://sisyphus_theme.tres" id="1_gwg2v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcpy1"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwg2v"]
+bg_color = Color(0.546248, 0.438497, 2.88785e-07, 1)
+
+[node name="UpgradeButton" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gwg2v")
+theme_override_styles/panel = SubResource("StyleBoxFlat_lcpy1")
+script = ExtResource("1_feo8w")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="UpgradeContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_gwg2v")
+
+[node name="UpgradeLabel" type="Label" parent="MarginContainer/UpgradeContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="UpgradeButton" type="Button" parent="MarginContainer/UpgradeContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_gwg2v")
+
+[connection signal="pressed" from="MarginContainer/UpgradeContainer/UpgradeButton" to="MarginContainer/UpgradeContainer" method="_on_upgrade_button_pressed"]

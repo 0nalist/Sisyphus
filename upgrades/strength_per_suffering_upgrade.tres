@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://o8grqfqtvjav"]
+
+[ext_resource type="Script" uid="uid://b8qbm4u3q4vhy" path="res://upgrade.gd" id="1_8l2fv"]
+
+[resource]
+script = ExtResource("1_8l2fv")
+name = "+0.05 Strength per Suffering"
+description = ""
+base_cost = 1
+currency = 0
+max_purchases = -1
+effect_id = "strength_gain_up"
+value = 0.05
+times_purchased = 0
+metadata/_custom_type_script = "uid://b8qbm4u3q4vhy"

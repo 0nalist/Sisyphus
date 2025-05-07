@@ -1,0 +1,175 @@
+[gd_scene load_steps=6 format=3 uid="uid://cp815mpgfya5x"]
+
+[ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://sisyphus_theme.tres" id="1_0ed4t"]
+[ext_resource type="Script" uid="uid://csfc7r40xa3il" path="res://upgrade_shop.gd" id="1_mxpyc"]
+[ext_resource type="PackedScene" uid="uid://dr47827icsavk" path="res://upgrade_button.tscn" id="3_0lay5"]
+[ext_resource type="Texture2D" uid="uid://w7y8qtxulwaf" path="res://greek_wave.png" id="4_pacmv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ed4t"]
+bg_color = Color(0.878431, 0.431373, 0.0156863, 1)
+
+[node name="UpgradeShop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_0ed4t")
+script = ExtResource("1_mxpyc")
+upgrade_button_scene = ExtResource("3_0lay5")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_0ed4t")
+theme_override_styles/panel = SubResource("StyleBoxFlat_0ed4t")
+
+[node name="GreekWave" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -64.0
+offset_right = 960.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("4_pacmv")
+
+[node name="GreekWave2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -960.0
+offset_right = 960.0
+offset_bottom = 64.0
+grow_horizontal = 2
+texture = ExtResource("4_pacmv")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ShopLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 48
+text = "Meditations"
+
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+
+[node name="LabelContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MeaningLabel" type="Label" parent="MarginContainer/VBoxContainer/LabelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Meaning: "
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/LabelContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="HappinessLabel" type="Label" parent="MarginContainer/VBoxContainer/LabelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Happiness: "
+
+[node name="UpgradeContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+columns = 3
+
+[node name="StrengthGainButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "strength"
+
+[node name="StrengthCostButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="WeightGainButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="WeightCostButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="AutobuyStrengthButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="AutobuyWeightButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="DayLengthFlatButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="DayLengthMultButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+text = "    Toil    "
+
+[node name="Control4" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/StrengthGainButton" to="." method="_on_strength_gain_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/StrengthCostButton" to="." method="_on_strength_cost_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/WeightGainButton" to="." method="_on_weight_gain_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/WeightCostButton" to="." method="_on_weight_cost_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/AutobuyStrengthButton" to="." method="_on_autobuy_strength_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/AutobuyWeightButton" to="." method="_on_autobuy_weight_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/DayLengthFlatButton" to="." method="_on_day_length_flat_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/DayLengthMultButton" to="." method="_on_day_length_mult_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

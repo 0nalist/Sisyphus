@@ -1,0 +1,61 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://b8v02hn8g813h"]
+
+[ext_resource type="FontFile" uid="uid://bkjiakqupr7we" path="res://GALS.ttf" id="1_sdq4k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdq4k"]
+bg_color = Color(0.6, 0.6, 0.6, 0.909804)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jj73y"]
+bg_color = Color(0.595392, 0.396142, 0.629345, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2eh4o"]
+bg_color = Color(0, 0, 0, 1)
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xdvr5"]
+bg_color = Color(0.345098, 0.207843, 0.368627, 1)
+border_width_left = 2
+border_width_top = 2
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4tmt"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.839216, 1, 0.717647, 1)
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[resource]
+default_font = ExtResource("1_sdq4k")
+Button/colors/font_disabled_color = Color(0.87451, 0.87451, 0.87451, 1)
+Button/constants/align_to_largest_stylebox = 1
+Button/constants/h_separation = 4
+Button/constants/line_spacing = 2
+Button/constants/outline_size = 2
+Button/styles/disabled = SubResource("StyleBoxFlat_sdq4k")
+Button/styles/hover = SubResource("StyleBoxFlat_jj73y")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_2eh4o")
+Button/styles/normal = SubResource("StyleBoxFlat_xdvr5")
+Button/styles/pressed = SubResource("StyleBoxFlat_2eh4o")
+Label/colors/font_color = Color(0, 0, 0, 1)
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_k4tmt")

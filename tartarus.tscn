@@ -1,0 +1,292 @@
+[gd_scene load_steps=14 format=3 uid="uid://ctc4gpjpk1de3"]
+
+[ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://sisyphus_theme.tres" id="1_ktc57"]
+[ext_resource type="Script" uid="uid://02c1xmwyeepc" path="res://tartarus.gd" id="1_ss6v2"]
+[ext_resource type="PackedScene" uid="uid://cp815mpgfya5x" path="res://upgrade_shop.tscn" id="3_ljron"]
+[ext_resource type="Texture2D" uid="uid://cc0kefcx8umps" path="res://sisyphusStockImg.jpg" id="3_rmx4a"]
+[ext_resource type="PackedScene" uid="uid://diwk0tlamcmlv" path="res://day_end.tscn" id="4_70rlu"]
+[ext_resource type="Texture2D" uid="uid://w7y8qtxulwaf" path="res://greek_wave.png" id="5_1ged7"]
+[ext_resource type="Texture2D" uid="uid://b6n1157thj4hg" path="res://sisyphus_cutout.png" id="5_ustnh"]
+[ext_resource type="AudioStream" uid="uid://davcrj4j8mvlv" path="res://anorlondo1.4.wav" id="8_8ubw0"]
+
+[sub_resource type="Animation" id="Animation_8ubw0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1ged7"]
+resource_name = "roll"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.43, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0925025, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y2o57"]
+_data = {
+&"RESET": SubResource("Animation_8ubw0"),
+&"roll": SubResource("Animation_1ged7")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ubw0"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y2o57"]
+bg_color = Color(0.6, 0.819608, 0.482353, 1)
+
+[node name="Tartarus" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme = ExtResource("1_ktc57")
+script = ExtResource("1_ss6v2")
+upgrade_shop_scene = ExtResource("3_ljron")
+day_end_scene = ExtResource("4_70rlu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.878431, 0.431373, 0.0156863, 1)
+
+[node name="GreekWave2" type="Sprite2D" parent="."]
+position = Vector2(647, 30)
+texture = ExtResource("5_1ged7")
+
+[node name="GreekWave" type="Sprite2D" parent="."]
+position = Vector2(633, 574)
+rotation = -0.39968
+texture = ExtResource("5_1ged7")
+
+[node name="SisyphusStockImg" type="Sprite2D" parent="."]
+position = Vector2(548, 374)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_ustnh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SisyphusStockImg"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_y2o57")
+}
+autoplay = "roll"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SisyphusLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "SISYPHUS"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_8ubw0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_y2o57")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SufferingLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+tooltip_text = "a fact of life"
+mouse_filter = 1
+text = "Suffering: "
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+tooltip_text = "Determines progress rate"
+mouse_filter = 1
+text = "Strength: "
+
+[node name="BoulderWeightLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+tooltip_text = "Increases suffering"
+mouse_filter = 1
+text = "Weight:"
+
+[node name="SpeedLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+tooltip_text = "strength / boulder weight"
+mouse_filter = 1
+text = "Speed:"
+
+[node name="DayLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+tooltip_text = "Time left before the boulder rolls away"
+mouse_filter = 1
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_rmx4a")
+expand_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+
+[node name="MeaningLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Meaning: "
+horizontal_alignment = 2
+
+[node name="HappinessLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Happiness:"
+horizontal_alignment = 2
+
+[node name="SummitLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Summits:"
+horizontal_alignment = 2
+
+[node name="PurchaseAmountDropdown" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+size_flags_stretch_ratio = 11.46
+focus_mode = 0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="StrengthButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "+0.1 Strength (1 suffering)"
+alignment = 0
+
+[node name="AutobuyStrengthCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Autobuy Strength"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="WeightButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "+0.1 weight (1 Strength)"
+alignment = 0
+
+[node name="AutobuyWeightCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Autobuy Weight"
+
+[node name="MusicButton" type="Button" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+focus_mode = 0
+toggle_mode = true
+text = "music"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="MarginContainer/MusicButton"]
+unique_name_in_owner = true
+stream = ExtResource("8_8ubw0")
+
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/PurchaseAmountDropdown" to="." method="_on_purchase_amount_dropdown_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StrengthButton" to="." method="_on_strength_button_pressed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/AutobuyStrengthCheckBox" to="." method="_on_autobuy_strength_check_box_toggled"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/WeightButton" to="." method="_on_weight_button_pressed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/AutobuyWeightCheckBox" to="." method="_on_autobuy_weight_check_box_toggled"]
+[connection signal="toggled" from="MarginContainer/MusicButton" to="." method="_on_music_button_toggled"]
