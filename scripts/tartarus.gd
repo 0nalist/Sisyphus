@@ -56,6 +56,10 @@ var meaning: float = 0.0
 var happiness: float = 0.0
 var summits: int = 0
 
+var morning_strength: float = 1.0
+var morning_weight: float = 1.0
+
+
 var passive_meaning_rate := 0.0
 var permanent_passive_meaning:= 0.0
 
@@ -96,7 +100,14 @@ var upgrade_effects = {
 	"passive_meaning_per_1000_happiness": func(value):
 		permanent_passive_meaning += value,
 	"double_suffering": func(_value):
-		double_suffering_enabled = true
+		double_suffering_enabled = true,
+	"starting_strength": func(value):
+		pass,
+		#morning_strength += value,
+		#print("🔁 Upgrade applied: morning_strength is now", morning_strength),
+	"starting_weight": func(value):
+		pass,
+		#morning_weight += value,
 }
 
 const MOUNTAIN_NAMES = [
@@ -145,6 +156,8 @@ func _ready() -> void:
 	timer.timeout.connect(_on_timer_timeout)
 
 func _on_timer_timeout():
+	if is_in_shop:
+		return
 	var percent_increase = (summits) / 100.0
 	strength += strength * percent_increase
 
@@ -262,6 +275,18 @@ func autobuy():
 			boulder_weight += weight_gain
 			strength = max(strength, 0.0)
 
+func apply_starting_stat_upgrades():
+	morning_strength = 1.0
+	morning_weight = 1.0
+	for upgrade in all_upgrades:
+		match upgrade.effect_id:
+			"starting_strength":
+				morning_strength += upgrade.value * upgrade.times_purchased
+			"starting_weight":
+				morning_weight += upgrade.value * upgrade.times_purchased
+
+
+
 var stickers: Array[Texture] = [
 	
 ]
@@ -284,11 +309,26 @@ func _handle_end_of_day(success: bool) -> void:
 		happiness += meaning * happiness_conversion_rate
 		summits += 1
 
-	# Prepare result screen
+	'''
+	for upgrade in all_upgrades:
+		if upgrade.effect_id in upgrade_effects:
+			var effect_func = upgrade_effects[upgrade.effect_id]
+			for i in upgrade.times_purchased:
+				effect_func.call(upgrade.value)
+	'''
+	# Reset day progress
+	progress = 0.0
+	suffering = 0.0
+	boulder_weight = morning_weight
+	strength = morning_strength
+	day_timer = 0.0
+	day_count += 1
+
+	# Continue as normal...
 	is_in_shop = true
 	var result_popup = day_end_scene.instantiate()
 	add_child(result_popup)
-	
+
 	if autoascend_enabled and success:
 		await get_tree().create_timer(.4).timeout
 		result_popup._on_ascend_button_pressed()
@@ -303,13 +343,6 @@ func _handle_end_of_day(success: bool) -> void:
 	result_popup.setup(progress_percent, success, mountain_name, total_playtime)
 	result_popup.continue_pressed.connect(_on_end_of_day_result_closed)
 	result_popup.ascend_pressed.connect(_on_ascend_pressed)
-	# Reset day progress
-	progress = 0.0
-	suffering = 0.0
-	boulder_weight = 1.0
-	strength = 1.0
-	day_timer = 0.0
-	day_count += 1
 
 func _on_end_of_day_result_closed() -> void:
 	var shop = upgrade_shop_scene.instantiate()
@@ -362,6 +395,7 @@ func _reset_progress(preserve_happiness: bool = false) -> void:
 	passive_meaning_rate = 0
 	double_suffering_enabled = false
 	
+	
 	## Reset upgrades
 	for upgrade in upgrades_to_reset:
 		if upgrade is Upgrade:
@@ -370,6 +404,20 @@ func _reset_progress(preserve_happiness: bool = false) -> void:
 
 func _on_shop_closed() -> void:
 	is_in_shop = false
+	for upgrade in all_upgrades:
+		if upgrade.effect_id in upgrade_effects:
+			var effect_func = upgrade_effects[upgrade.effect_id]
+			for i in upgrade.times_purchased:
+				effect_func.call(upgrade.value)
+	
+	apply_starting_stat_upgrades()
+
+	# Set strength/weight
+	strength = morning_strength
+	boulder_weight = morning_weight
+
+	print("New morning_strength:", morning_strength)
+	print("New morning_weight:", morning_weight)
 
 func get_day_duration() -> float:
 	var base := day_duration + get_day_length_bonus("add_day_seconds_temp") + get_day_length_bonus("add_day_seconds_permanent")

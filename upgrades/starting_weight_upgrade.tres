@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://b3yxc1kblgtdn"]
+
+[ext_resource type="Script" uid="uid://b8qbm4u3q4vhy" path="res://scripts/upgrade.gd" id="1_bduiv"]
+
+[resource]
+script = ExtResource("1_bduiv")
+name = "+0.1 Morning Weight"
+description = ""
+base_cost = 1.0
+currency = 0
+max_purchases = -1
+effect_id = "starting_weight"
+value = 0.1
+cost_scale = 1.4
+permanent = false
+times_purchased = 0
+metadata/_custom_type_script = "uid://b8qbm4u3q4vhy"
