@@ -35,7 +35,7 @@ mouse_filter = 1
 theme = ExtResource("1_0ed4t")
 script = ExtResource("1_mxpyc")
 upgrade_button_scene = ExtResource("3_0lay5")
-upgrade_resources = Array[Resource]([ExtResource("4_q1psx"), ExtResource("5_8goot"), ExtResource("12_8goot"), ExtResource("13_gc2o6"), ExtResource("11_57m7w"), ExtResource("10_3r51h"), ExtResource("7_jbnth"), ExtResource("9_ojws6"), ExtResource("8_3xpl5"), ExtResource("13_jbnth"), ExtResource("6_gc2o6"), ExtResource("15_3xpl5"), ExtResource("16_ojws6"), ExtResource("17_3r51h")])
+upgrade_resources = Array[Resource]([ExtResource("4_q1psx"), ExtResource("5_8goot"), ExtResource("12_8goot"), ExtResource("13_gc2o6"), ExtResource("11_57m7w"), ExtResource("7_jbnth"), ExtResource("10_3r51h"), ExtResource("8_3xpl5"), ExtResource("9_ojws6"), ExtResource("13_jbnth"), ExtResource("6_gc2o6"), ExtResource("15_3xpl5"), ExtResource("16_ojws6"), ExtResource("17_3r51h")])
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
