@@ -13,6 +13,8 @@ enum CurrencyType { MEANING, HAPPINESS }
 @export var effect_id: String
 @export var value: float = 0.0  # How much this upgrade changes the variable
 
+@export var cost_scale: float = 1.4
+
 @export var permanent: bool = false
 
 @export var times_purchased: int = 0
@@ -46,5 +48,5 @@ func purchase(player_node: Node) -> bool:
 	return true
 
 func get_scaled_cost() -> float:
-	var raw_cost = base_cost * pow(1.4, times_purchased)
+	var raw_cost = base_cost * pow(cost_scale, times_purchased)
 	return round(raw_cost * 100.0) / 100.0

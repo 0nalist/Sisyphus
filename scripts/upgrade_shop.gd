@@ -25,6 +25,9 @@ signal shop_closed
 var tartarus_ref: Node
 var upgrade_buttons := []
 
+var wave_scroll_speed: int = 4
+
+
 func _ready() -> void:
 	print("🧪 upgrade_shop.gd ready called")
 	set_process(true)
@@ -66,8 +69,8 @@ func update_ui() -> void:
 
 
 func _process(_delta: float) -> void:
-	%Parallax2D.autoscroll.x = 4
-	%Parallax2D2.autoscroll.x = -4
+	%Parallax2D.autoscroll.x = wave_scroll_speed
+	%Parallax2D2.autoscroll.x = -wave_scroll_speed
 
 func _on_strength_upgrade_button_pressed() -> void:
 	if tartarus_ref.meaning >= 10:
@@ -133,3 +136,11 @@ func _on_day_length_flat_button_pressed() -> void:
 
 func _on_day_length_mult_button_pressed() -> void:
 	pass # Replace with function body.
+
+
+func _on_faster_scroll_button_pressed() -> void:
+	wave_scroll_speed *= 1.5
+
+
+func _on_rest_scroll_button_2_pressed() -> void:
+	wave_scroll_speed = 4

@@ -12,14 +12,21 @@ var full_text := ""
 var reveal_tween: Tween
 var summited: bool = false
 
-func setup(progress_percent: float, reached_summit: bool) -> void:
+func setup(progress_percent: float, reached_summit: bool, mountain_name: String = "", playtime: float = 0.0) -> void:
 	ascend_button.hide()
 	continue_button.hide()
 	
 	# Choose the message
 	if reached_summit:
-		full_text = "After toiling all day, you reach the summit of the mountain! As the boulder slips away and rolls all the way back down the mountain, you are filled with a sense of accomplishment."
+		full_text = "After toiling all day, you reach the summit of " + mountain_name + "! As the boulder slips away and rolls all the way back down the mountain, you are filled with a sense of accomplishment."
 		summited = true
+		ascend_button.text = "Ascend " + mountain_name
+
+		if mountain_name == "Mount Olympus":
+			var hours = int(playtime) / 3600
+			var minutes = (int(playtime) % 3600) / 60
+			var seconds = int(playtime) % 60
+			full_text += "\n\nYou reached Mount Olympus after %02d:%02d:%02d of playtime." % [hours, minutes, seconds]
 	elif progress_percent >= 50.0:
 		full_text = "With the summit in sight, the day comes to an end, and the boulder slips away and rolls all the way back down the mountain."
 		summited = false

@@ -1,10 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://ctc4gpjpk1de3"]
+[gd_scene load_steps=15 format=3 uid="uid://ctc4gpjpk1de3"]
 
 [ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://assets/sisyphus_theme.tres" id="1_ktc57"]
 [ext_resource type="Script" uid="uid://02c1xmwyeepc" path="res://scripts/tartarus.gd" id="1_ss6v2"]
 [ext_resource type="PackedScene" uid="uid://cp815mpgfya5x" path="res://scenes/upgrade_shop.tscn" id="3_ljron"]
 [ext_resource type="PackedScene" uid="uid://diwk0tlamcmlv" path="res://scenes/day_end.tscn" id="4_70rlu"]
-[ext_resource type="Texture2D" uid="uid://w7y8qtxulwaf" path="res://assets/greek_wave.png" id="5_1ged7"]
+[ext_resource type="Texture2D" uid="uid://3u7ids6siyvs" path="res://assets/greek_wave_1924.png" id="5_ihtwa"]
 [ext_resource type="Texture2D" uid="uid://b6n1157thj4hg" path="res://assets/sisyphus_cutout.png" id="5_ustnh"]
 [ext_resource type="AudioStream" uid="uid://davcrj4j8mvlv" path="res://assets/music/anorlondo1.4.wav" id="8_8ubw0"]
 
@@ -17,6 +17,18 @@ tracks/0/path = NodePath(".:skew")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -39,10 +51,28 @@ tracks/0/keys = {
 "values": [0.0, 0.0925025, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_ihtwa"]
+resource_name = "struggle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0343251, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0174533, 0.010472, -0.0174533]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y2o57"]
 _data = {
 &"RESET": SubResource("Animation_8ubw0"),
-&"roll": SubResource("Animation_1ged7")
+&"roll": SubResource("Animation_1ged7"),
+&"struggle": SubResource("Animation_ihtwa")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ubw0"]
@@ -79,21 +109,21 @@ color = Color(0.878431, 0.431373, 0.0156863, 1)
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 unique_name_in_owner = true
-repeat_size = Vector2(1920, 0)
+repeat_size = Vector2(1924, 0)
 
 [node name="GreekWave2" type="Sprite2D" parent="Parallax2D"]
 position = Vector2(647, 30)
-texture = ExtResource("5_1ged7")
+texture = ExtResource("5_ihtwa")
 
 [node name="Parallax2D2" type="Parallax2D" parent="."]
 unique_name_in_owner = true
 rotation = -0.464258
 scroll_offset = Vector2(1820, 991)
-repeat_size = Vector2(1920, 0)
-repeat_times = 9
+repeat_size = Vector2(1924, 0)
+repeat_times = 10
 
 [node name="GreekWave" type="Sprite2D" parent="Parallax2D2"]
-texture = ExtResource("5_1ged7")
+texture = ExtResource("5_ihtwa")
 
 [node name="SisyphusStockImg" type="Sprite2D" parent="."]
 position = Vector2(548, 374)
@@ -141,6 +171,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Current Mt Olympus WR: 1:47:46"
 text = "Playtime:"
 
 [node name="SisyphusLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
@@ -189,7 +220,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-tooltip_text = "inevitable"
+tooltip_text = "Inevitable. Also, expendible"
 mouse_filter = 1
 text = "Suffering: "
 
@@ -198,7 +229,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-tooltip_text = "Determines progress rate"
+tooltip_text = "Determines speed"
 mouse_filter = 1
 text = "Strength: "
 
@@ -207,7 +238,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-tooltip_text = "Increases suffering"
+tooltip_text = "Increases suffering/second"
 mouse_filter = 1
 text = "Weight:"
 
@@ -225,7 +256,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-tooltip_text = "Time left before the boulder rolls away"
 mouse_filter = 1
 
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer"]
@@ -242,7 +272,7 @@ theme_override_constants/separation = 12
 [node name="MeaningLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Resets every day. Extra is converted into happiness when you ascend"
+tooltip_text = "Resets every day. Converted into happiness when you ascend"
 mouse_filter = 1
 text = "Meaning"
 horizontal_alignment = 2
@@ -258,7 +288,7 @@ horizontal_alignment = 2
 [node name="SummitLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "+1%^Ascents Strength/Second"
+tooltip_text = "+Ascents% Strength/Second"
 mouse_filter = 1
 text = "Ascents"
 horizontal_alignment = 2

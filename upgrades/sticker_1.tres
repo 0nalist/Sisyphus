@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://d0xe4dqugtvmh"]
+
+[ext_resource type="Script" uid="uid://b8qbm4u3q4vhy" path="res://scripts/upgrade.gd" id="1_yam6i"]
+
+[resource]
+script = ExtResource("1_yam6i")
+name = "Cool lil Sticker"
+description = ""
+base_cost = 1000.0
+currency = 1
+max_purchases = 3
+effect_id = ""
+value = 0.0
+permanent = true
+times_purchased = 0
+metadata/_custom_type_script = "uid://b8qbm4u3q4vhy"

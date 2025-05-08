@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://w7y8qtxulwaf"
-path="res://.godot/imported/greek_wave.png-0447e30052ef138e04ec73fd2704e7a3.ctex"
+uid="uid://3u7ids6siyvs"
+path="res://.godot/imported/greek_wave_1924.png-19bf5e66739b5ce43ecffc280e3686a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/greek_wave.png"
-dest_files=["res://.godot/imported/greek_wave.png-0447e30052ef138e04ec73fd2704e7a3.ctex"]
+source_file="res://assets/greek_wave_1924.png"
+dest_files=["res://.godot/imported/greek_wave_1924.png-19bf5e66739b5ce43ecffc280e3686a1.ctex"]
 
 [params]
 

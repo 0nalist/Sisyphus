@@ -88,13 +88,17 @@ var upgrade_effects = {
 		autoreflect_check_box.visible = true,
 	"enable_autoascend": func(_value):
 		auto_ascend_check_box.visible = true,
+	"get_sticker": func(_value):
+		get_next_sticker()
 }
 
 const MOUNTAIN_NAMES = [
 	"Orvilos", "Erymanthos", "Falakro", "Vasilitsa", "Athamanika", "Lakmos",
 	"Tymfristos", "Varnous", "Sternes", "Svourichti", "Aroania", "Bournelos", "Gavala",
 	"Kyllini", "Thodoris", "Mesa Soros", "Trocharis", "Taygetus", "Pachnes", "Timios Stavros",
-	"Parnassus", "Vardousia", "Tymfi", "Giona", "Gramos", "Kaimaktsalan", "Smolikas", "Olympus"
+	"Parnassus", "Vardousia", "Tymfi", "Giona", "Gramos", "Kaimaktsalan", "Smolikas", "Olympus",
+	"Olympus 2", "Olympus 3", "Olympus 4", "Olympus 5", "Olympus 6", "Olympus 7", "Olympus 9", "Olympus 10", 
+	"Olympus 11", "Olympus 12",  
 ]
 
 
@@ -151,7 +155,12 @@ func _process(delta: float) -> void:
 	if is_in_shop:
 		%AnimationPlayer.stop()
 		return
-	%AnimationPlayer.play("roll")
+	
+	
+	if strength / boulder_weight < 0.05:
+		%AnimationPlayer.play("struggle")
+	else:
+		%AnimationPlayer.play("roll")
 	# Accumulate suffering & progress
 	suffering += boulder_weight * delta
 	progress += strength/boulder_weight * delta
@@ -173,10 +182,14 @@ func _process(delta: float) -> void:
 	# Update UI
 	progress_bar.value = progress / summit_height * 100.0
 
-	%Parallax2D.autoscroll.x = -strength/boulder_weight
-	var scroll_speed = clamp(strength / boulder_weight, 0.1, 10.0)
-	%Parallax2D2.autoscroll = Vector2(2, -1) * -scroll_speed #* 100
-
+	var scroll_speed = strength / boulder_weight
+	%Parallax2D.autoscroll.x = -scroll_speed
+	%Parallax2D2.autoscroll = Vector2(2, -1) * -scroll_speed
+	if %Parallax2D2.scroll_offset.y > 1457:
+		%Parallax2D2.scroll_offset = Vector2(1820, 991)
+	#print("Sprite Global Pos:", background_sprite.global_position)
+	print("Parallax Scroll Offset:", %Parallax2D2.scroll_offset)
+	
 	suffering_label.text = "Suffering: " + ("%.2f" % suffering)
 	boulder_weight_label.text = "Weight: " + ("%.2f" % boulder_weight)
 	strength_label.text = "Strength: " + ("%.2f" % strength)
@@ -237,6 +250,13 @@ func autobuy():
 			boulder_weight += weight_gain
 			strength = max(strength, 0.0)
 
+var stickers: Array[Texture] = [
+	
+]
+func get_next_sticker():
+	
+	stickers.pop_front()
+
 
 func update_mountain_height_label():
 	%MountainNameLabel.text = get_current_mountain_name()
@@ -245,6 +265,8 @@ func update_mountain_height_label():
 func _handle_end_of_day(success: bool) -> void:
 	var meaning_gain = suffering * (meaning_conversion_rate if success else reduced_meaning_rate)
 	meaning += meaning_gain
+
+	var mountain_name = get_current_mountain_name()
 
 	if success:
 		happiness += meaning * happiness_conversion_rate
@@ -266,7 +288,7 @@ func _handle_end_of_day(success: bool) -> void:
 		is_in_shop = false
 
 	var progress_percent = (progress / summit_height) * 100.0
-	result_popup.setup(progress_percent, success)
+	result_popup.setup(progress_percent, success, mountain_name, total_playtime)
 	result_popup.continue_pressed.connect(_on_end_of_day_result_closed)
 	result_popup.ascend_pressed.connect(_on_ascend_pressed)
 	# Reset day progress
@@ -302,7 +324,7 @@ func _reset_progress(preserve_happiness: bool = false) -> void:
 	boulder_weight = 1.0
 	strength = 1.0
 	day_timer = 0.0
-	day_count = 1
+	#day_count = 1
 
 	meaning = 0.0
 	if not preserve_happiness:
@@ -324,6 +346,8 @@ func _reset_progress(preserve_happiness: bool = false) -> void:
 	autoreflect_check_box.visible = false
 	autoreflect_check_box.button_pressed = false
 	'''
+	
+	passive_meaning_rate = 0
 	
 	## Reset upgrades
 	for upgrade in upgrades_to_reset:

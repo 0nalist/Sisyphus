@@ -3,7 +3,6 @@
 [ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://assets/sisyphus_theme.tres" id="1_0ed4t"]
 [ext_resource type="Script" uid="uid://csfc7r40xa3il" path="res://scripts/upgrade_shop.gd" id="1_mxpyc"]
 [ext_resource type="PackedScene" uid="uid://dr47827icsavk" path="res://scenes/upgrade_button.tscn" id="3_0lay5"]
-[ext_resource type="Texture2D" uid="uid://w7y8qtxulwaf" path="res://assets/greek_wave.png" id="4_pacmv"]
 [ext_resource type="Resource" uid="uid://bx6nnvros30r3" path="res://upgrades/autobuy_strength_upgrade.tres" id="4_q1psx"]
 [ext_resource type="Resource" uid="uid://dgcolyhhop461" path="res://upgrades/autobuy_weight_upgrade.tres" id="5_8goot"]
 [ext_resource type="Resource" uid="uid://deaxcdfpqhaf3" path="res://upgrades/double_day_length_upgrade.tres" id="6_gc2o6"]
@@ -16,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://c2wccdat8dyt1" path="res://upgrades/permanent_day_length_flat_upgrade.tres" id="13_gc2o6"]
 [ext_resource type="Resource" uid="uid://d3b3j010ihs5" path="res://upgrades/passive_meaning_per_second.tres" id="13_jbnth"]
 [ext_resource type="Resource" uid="uid://okkhusfcphwr" path="res://upgrades/autoascend_upgrade.tres" id="15_3xpl5"]
+[ext_resource type="Texture2D" uid="uid://3u7ids6siyvs" path="res://assets/greek_wave_1924.png" id="16_3xpl5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ed4t"]
 bg_color = Color(0.878431, 0.431373, 0.0156863, 1)
@@ -29,6 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 1
 theme = ExtResource("1_0ed4t")
 script = ExtResource("1_mxpyc")
 upgrade_button_scene = ExtResource("3_0lay5")
@@ -47,7 +48,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_0ed4t")
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 unique_name_in_owner = true
-repeat_size = Vector2(1920, 0)
+repeat_size = Vector2(1924, 0)
 
 [node name="GreekWave" type="TextureRect" parent="Parallax2D"]
 anchors_preset = 7
@@ -59,12 +60,12 @@ offset_right = 1920.0
 offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("4_pacmv")
+texture = ExtResource("16_3xpl5")
 
 [node name="Parallax2D2" type="Parallax2D" parent="."]
 unique_name_in_owner = true
 scroll_offset = Vector2(1925, 585)
-repeat_size = Vector2(1920, 0)
+repeat_size = Vector2(1924, 0)
 
 [node name="GreekWave2" type="TextureRect" parent="Parallax2D2"]
 anchors_preset = 5
@@ -74,7 +75,7 @@ offset_left = -384.0
 offset_right = 1536.0
 offset_bottom = 64.0
 grow_horizontal = 2
-texture = ExtResource("4_pacmv")
+texture = ExtResource("16_3xpl5")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -187,6 +188,35 @@ text = "    Toil    "
 custom_minimum_size = Vector2(50, 25)
 layout_mode = 2
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="FasterScrollButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 12
+text = "Faster Scroll"
+
+[node name="RestScrollButton2" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 12
+text = "Reset Scroll"
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/StrengthGainButton" to="." method="_on_strength_gain_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/StrengthCostButton" to="." method="_on_strength_cost_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/WeightGainButton" to="." method="_on_weight_gain_button_pressed"]
@@ -196,3 +226,5 @@ layout_mode = 2
 [connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/DayLengthFlatButton" to="." method="_on_day_length_flat_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/DayLengthMultButton" to="." method="_on_day_length_mult_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/FasterScrollButton" to="." method="_on_faster_scroll_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/RestScrollButton2" to="." method="_on_rest_scroll_button_2_pressed"]
