@@ -10,6 +10,8 @@ var autobuy_weight_enabled := false
 var autoreflect_enabled := false
 var autoascend_enabled := false
 
+var double_suffering_enabled := false
+
 var upgrades_to_reset: Array[Upgrade] = []
 var all_upgrades: Array[Upgrade] = []
 
@@ -55,6 +57,7 @@ var happiness: float = 0.0
 var summits: int = 0
 
 var passive_meaning_rate := 0.0
+var permanent_passive_meaning:= 0.0
 
 # --- Upgradeable Economy Variables ---
 @export var strength_cost: float = 1.0
@@ -89,7 +92,11 @@ var upgrade_effects = {
 	"enable_autoascend": func(_value):
 		auto_ascend_check_box.visible = true,
 	"get_sticker": func(_value):
-		get_next_sticker()
+		get_next_sticker(),
+	"passive_meaning_per_1000_happiness": func(value):
+		permanent_passive_meaning += value,
+	"double_suffering": func(_value):
+		double_suffering_enabled = true
 }
 
 const MOUNTAIN_NAMES = [
@@ -162,10 +169,15 @@ func _process(delta: float) -> void:
 	else:
 		%AnimationPlayer.play("roll")
 	# Accumulate suffering & progress
-	suffering += boulder_weight * delta
+	if double_suffering_enabled:
+		suffering += boulder_weight * delta * 2
+	else:
+		suffering += boulder_weight * delta
 	progress += strength/boulder_weight * delta
 	
 	meaning += passive_meaning_rate * delta
+	var happiness_thousands = int(happiness/1000)
+	meaning += permanent_passive_meaning * happiness_thousands * delta
 	var projected_meaning = suffering * (meaning_conversion_rate if progress >= summit_height else reduced_meaning_rate)
 	meaning_label.text = "%.2f Meaning \n(%.2f banked + %.2f projected)" % [
 		meaning + projected_meaning,
@@ -188,7 +200,7 @@ func _process(delta: float) -> void:
 	if %Parallax2D2.scroll_offset.y > 1457:
 		%Parallax2D2.scroll_offset = Vector2(1820, 991)
 	#print("Sprite Global Pos:", background_sprite.global_position)
-	print("Parallax Scroll Offset:", %Parallax2D2.scroll_offset)
+	
 	
 	suffering_label.text = "Suffering: " + ("%.2f" % suffering)
 	boulder_weight_label.text = "Weight: " + ("%.2f" % boulder_weight)
@@ -348,6 +360,7 @@ func _reset_progress(preserve_happiness: bool = false) -> void:
 	'''
 	
 	passive_meaning_rate = 0
+	double_suffering_enabled = false
 	
 	## Reset upgrades
 	for upgrade in upgrades_to_reset:

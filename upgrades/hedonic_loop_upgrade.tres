@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://bry65dissbv8x"]
+
+[ext_resource type="Script" uid="uid://b8qbm4u3q4vhy" path="res://scripts/upgrade.gd" id="1_5jt42"]
+
+[resource]
+script = ExtResource("1_5jt42")
+name = "+1 Passive Meaning per 1000 Happiness"
+description = ""
+base_cost = 1000.0
+currency = 1
+max_purchases = -1
+effect_id = "passive_meaning_per_1000_happiness"
+value = 1.0
+cost_scale = 1.4
+permanent = true
+times_purchased = 0
+metadata/_custom_type_script = "uid://b8qbm4u3q4vhy"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cp815mpgfya5x"]
+[gd_scene load_steps=20 format=3 uid="uid://cp815mpgfya5x"]
 
 [ext_resource type="Theme" uid="uid://b8v02hn8g813h" path="res://assets/sisyphus_theme.tres" id="1_0ed4t"]
 [ext_resource type="Script" uid="uid://csfc7r40xa3il" path="res://scripts/upgrade_shop.gd" id="1_mxpyc"]
@@ -16,6 +16,8 @@
 [ext_resource type="Resource" uid="uid://d3b3j010ihs5" path="res://upgrades/passive_meaning_per_second.tres" id="13_jbnth"]
 [ext_resource type="Resource" uid="uid://okkhusfcphwr" path="res://upgrades/autoascend_upgrade.tres" id="15_3xpl5"]
 [ext_resource type="Texture2D" uid="uid://3u7ids6siyvs" path="res://assets/greek_wave_1924.png" id="16_3xpl5"]
+[ext_resource type="Resource" uid="uid://bry65dissbv8x" path="res://upgrades/hedonic_loop_upgrade.tres" id="16_ojws6"]
+[ext_resource type="Resource" uid="uid://iuly7i0pyp6h" path="res://upgrades/double_suffering_upgrade.tres" id="17_3r51h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ed4t"]
 bg_color = Color(0.878431, 0.431373, 0.0156863, 1)
@@ -33,7 +35,7 @@ mouse_filter = 1
 theme = ExtResource("1_0ed4t")
 script = ExtResource("1_mxpyc")
 upgrade_button_scene = ExtResource("3_0lay5")
-upgrade_resources = Array[Resource]([ExtResource("4_q1psx"), ExtResource("5_8goot"), ExtResource("12_8goot"), ExtResource("13_gc2o6"), ExtResource("11_57m7w"), ExtResource("10_3r51h"), ExtResource("7_jbnth"), ExtResource("9_ojws6"), ExtResource("8_3xpl5"), ExtResource("13_jbnth"), ExtResource("6_gc2o6"), ExtResource("15_3xpl5")])
+upgrade_resources = Array[Resource]([ExtResource("4_q1psx"), ExtResource("5_8goot"), ExtResource("12_8goot"), ExtResource("13_gc2o6"), ExtResource("11_57m7w"), ExtResource("10_3r51h"), ExtResource("7_jbnth"), ExtResource("9_ojws6"), ExtResource("8_3xpl5"), ExtResource("13_jbnth"), ExtResource("6_gc2o6"), ExtResource("15_3xpl5"), ExtResource("16_ojws6"), ExtResource("17_3r51h")])
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -125,53 +127,24 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Happiness: "
 
-[node name="UpgradeContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="UpgradeHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
-columns = 4
+theme_override_constants/separation = 10
 
-[node name="StrengthGainButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
+[node name="UpgradeContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/UpgradeHBox"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
-text = "strength"
+size_flags_horizontal = 6
+size_flags_vertical = 3
+columns = 3
 
-[node name="StrengthCostButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
+[node name="PermUpgradeContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/UpgradeHBox"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
-
-[node name="WeightGainButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="WeightCostButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="AutobuyStrengthButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="AutobuyWeightButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="DayLengthFlatButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="DayLengthMultButton" type="Button" parent="MarginContainer/VBoxContainer/UpgradeContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+columns = 3
 
 [node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(50, 8)
@@ -205,7 +178,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 focus_mode = 0
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "Faster Scroll"
 
 [node name="RestScrollButton2" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer"]
@@ -214,17 +187,9 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 focus_mode = 0
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "Reset Scroll"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/StrengthGainButton" to="." method="_on_strength_gain_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/StrengthCostButton" to="." method="_on_strength_cost_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/WeightGainButton" to="." method="_on_weight_gain_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/WeightCostButton" to="." method="_on_weight_cost_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/AutobuyStrengthButton" to="." method="_on_autobuy_strength_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/AutobuyWeightButton" to="." method="_on_autobuy_weight_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/DayLengthFlatButton" to="." method="_on_day_length_flat_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeContainer/DayLengthMultButton" to="." method="_on_day_length_mult_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/FasterScrollButton" to="." method="_on_faster_scroll_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/RestScrollButton2" to="." method="_on_rest_scroll_button_2_pressed"]
