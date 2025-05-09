@@ -107,30 +107,60 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.878431, 0.431373, 0.0156863, 1)
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
+[node name="Header" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Parallax2D" type="Parallax2D" parent="Header"]
 unique_name_in_owner = true
 repeat_size = Vector2(1924, 0)
+repeat_times = 6
 
-[node name="GreekWave2" type="Sprite2D" parent="Parallax2D"]
+[node name="GreekWave2" type="Sprite2D" parent="Header/Parallax2D"]
 position = Vector2(647, 30)
 texture = ExtResource("5_ihtwa")
 
-[node name="Parallax2D2" type="Parallax2D" parent="."]
+[node name="Footer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Parallax2D2" type="Parallax2D" parent="Footer"]
 unique_name_in_owner = true
 rotation = -0.464258
-scroll_offset = Vector2(1820, 1152.82)
+scroll_offset = Vector2(1820, 0)
 repeat_size = Vector2(1924, 0)
 repeat_times = 10
 
-[node name="GreekWave" type="Sprite2D" parent="Parallax2D2"]
+[node name="GreekWave" type="Sprite2D" parent="Footer/Parallax2D2"]
 texture = ExtResource("5_ihtwa")
 
-[node name="SisyphusStockImg" type="Sprite2D" parent="."]
-position = Vector2(548, 374)
-scale = Vector2(0.5, 0.5)
+[node name="Center" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SisyphusStockImg" type="Sprite2D" parent="Center"]
+position = Vector2(0, 74)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_ustnh")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SisyphusStockImg"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Center/SisyphusStockImg"]
 unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_y2o57")
@@ -178,7 +208,7 @@ text = "Playtime:"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 64
 text = "SISYPHUS"
 horizontal_alignment = 1
 
@@ -191,6 +221,7 @@ size_flags_vertical = 8
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 19
 text = "Mount Olympus"
 horizontal_alignment = 2
 
@@ -198,6 +229,7 @@ horizontal_alignment = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 19
 text = "m"
 horizontal_alignment = 2
 
@@ -222,6 +254,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 tooltip_text = "Inevitable. Also, expendible"
 mouse_filter = 1
+theme_override_font_sizes/font_size = 20
 text = "Suffering: "
 
 [node name="StrengthLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
@@ -231,6 +264,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 tooltip_text = "Determines speed"
 mouse_filter = 1
+theme_override_font_sizes/font_size = 20
 text = "Strength: "
 
 [node name="BoulderWeightLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
@@ -240,6 +274,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 tooltip_text = "Increases suffering/second"
 mouse_filter = 1
+theme_override_font_sizes/font_size = 20
 text = "Weight:"
 
 [node name="SpeedLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
@@ -249,6 +284,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 tooltip_text = "strength / boulder weight"
 mouse_filter = 1
+theme_override_font_sizes/font_size = 20
 text = "Speed:"
 
 [node name="DayLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
@@ -274,6 +310,7 @@ unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Resets every day. Converted into happiness when you ascend"
 mouse_filter = 1
+theme_override_font_sizes/font_size = 20
 text = "Meaning"
 horizontal_alignment = 2
 
@@ -282,6 +319,7 @@ unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Fleeting, but also everlasting"
 mouse_filter = 1
+theme_override_font_sizes/font_size = 20
 text = "Happiness"
 horizontal_alignment = 2
 
@@ -290,6 +328,7 @@ unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "+Ascents% Strength/Second"
 mouse_filter = 1
+theme_override_font_sizes/font_size = 20
 text = "Ascents"
 horizontal_alignment = 2
 
@@ -301,6 +340,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 10
 size_flags_stretch_ratio = 11.46
 focus_mode = 0
+theme_override_font_sizes/font_size = 24
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -315,6 +355,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+theme_override_font_sizes/font_size = 24
 text = "+0.1 Strength (1 suffering)"
 alignment = 0
 
@@ -333,6 +374,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
+theme_override_font_sizes/font_size = 24
 text = "+0.1 weight (1 Strength)"
 alignment = 0
 
@@ -381,11 +423,6 @@ stream = ExtResource("8_8ubw0")
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 autostart = true
-
-[node name="Header" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/PurchaseAmountDropdown" to="." method="_on_purchase_amount_dropdown_item_selected"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StrengthButton" to="." method="_on_strength_button_pressed"]
