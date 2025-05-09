@@ -63,6 +63,8 @@ var morning_weight: float = 1.0
 var passive_meaning_rate := 0.0
 var permanent_passive_meaning:= 0.0
 
+var happiness_sacrifice_rate := 0.0
+
 # --- Upgradeable Economy Variables ---
 @export var strength_cost: float = 1.0
 @export var weight_cost: float = 1.0
@@ -108,6 +110,8 @@ var upgrade_effects = {
 	"starting_weight": func(value):
 		pass,
 		#morning_weight += value,
+	"sacrifice_happiness": func(value):
+		happiness_sacrifice_rate += value
 }
 
 const MOUNTAIN_NAMES = [
@@ -145,6 +149,7 @@ func _ready() -> void:
 	autobuy_weight_check_box.button_pressed = autobuy_weight_enabled
 	
 	update_mountain_height_label()
+	
 	
 	autoreflect_check_box.hide()
 	auto_ascend_check_box.hide()
@@ -199,7 +204,10 @@ func _process(delta: float) -> void:
 	] 
 	
 	happiness_label.text = "%.2f Happiness" % happiness
-	summit_label.text = "%d Ascents" % summits
+	if summits == 1:
+		summit_label.text = "%d Ascent " % summits
+	else:
+		summit_label.text = "%d Ascents" % summits
 	
 	# Advance the day timer
 	day_timer += delta
@@ -241,7 +249,8 @@ func _process(delta: float) -> void:
 	strength_button.disabled = strength_units <= 0
 	weight_button.disabled = weight_units <= 0
 	
-	
+	happiness -= happiness_sacrifice_rate * delta
+	suffering += happiness_sacrifice_rate * delta
 	
 	autobuy()
 	

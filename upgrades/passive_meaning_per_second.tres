@@ -4,13 +4,14 @@
 
 [resource]
 script = ExtResource("1_ria30")
-name = "+0.05 Meaning/Second"
+name = "+0.04 Meaning/Second"
 description = ""
 base_cost = 1.0
 currency = 0
 max_purchases = -1
 effect_id = "meaning_per_second_up"
-value = 0.05
+value = 0.04
+cost_scale = 1.4
 permanent = false
 times_purchased = 0
 metadata/_custom_type_script = "uid://b8qbm4u3q4vhy"

@@ -6,12 +6,12 @@
 script = ExtResource("1_7jeb7")
 name = "Double Suffering"
 description = ""
-base_cost = 500.0
+base_cost = 100.0
 currency = 1
-max_purchases = 1
+max_purchases = 3
 effect_id = "double_suffering"
 value = 2.0
-cost_scale = 1.4
+cost_scale = 4.0
 permanent = false
 times_purchased = 0
 metadata/_custom_type_script = "uid://b8qbm4u3q4vhy"

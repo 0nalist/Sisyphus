@@ -4,12 +4,14 @@
 
 [resource]
 script = ExtResource("1_ppdoa")
-name = "-10% Strength Cost"
+name = "-5% Strength Cost"
 description = ""
-base_cost = 1
+base_cost = 1.0
 currency = 0
 max_purchases = -1
 effect_id = "strength_cost_down"
-value = 0.1
+value = 0.05
+cost_scale = 1.4
+permanent = false
 times_purchased = 0
 metadata/_custom_type_script = "uid://b8qbm4u3q4vhy"

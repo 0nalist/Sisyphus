@@ -20,7 +20,9 @@ boot_splash/minimum_display_time=50
 
 [display]
 
-window/stretch/mode="viewport"
+window/size/viewport_width=1536
+window/size/viewport_height=864
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
 [rendering]

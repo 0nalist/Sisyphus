@@ -118,7 +118,7 @@ texture = ExtResource("5_ihtwa")
 [node name="Parallax2D2" type="Parallax2D" parent="."]
 unique_name_in_owner = true
 rotation = -0.464258
-scroll_offset = Vector2(1820, 991)
+scroll_offset = Vector2(1820, 1152.82)
 repeat_size = Vector2(1924, 0)
 repeat_times = 10
 
@@ -382,8 +382,10 @@ stream = ExtResource("8_8ubw0")
 unique_name_in_owner = true
 autostart = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 324)
+[node name="Header" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/PurchaseAmountDropdown" to="." method="_on_purchase_amount_dropdown_item_selected"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StrengthButton" to="." method="_on_strength_button_pressed"]
