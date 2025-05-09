@@ -249,8 +249,9 @@ func _process(delta: float) -> void:
 	strength_button.disabled = strength_units <= 0
 	weight_button.disabled = weight_units <= 0
 	
-	happiness -= happiness_sacrifice_rate * delta
-	suffering += happiness_sacrifice_rate * delta
+	if happiness > 0:
+		happiness -= happiness_sacrifice_rate * delta
+		suffering += happiness_sacrifice_rate * delta
 	
 	autobuy()
 	
@@ -404,6 +405,7 @@ func _reset_progress(preserve_happiness: bool = false) -> void:
 	passive_meaning_rate = 0
 	double_suffering_enabled = false
 	
+	happiness_sacrifice_rate = 0
 	
 	## Reset upgrades
 	for upgrade in upgrades_to_reset:

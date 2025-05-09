@@ -6,9 +6,9 @@
 script = ExtResource("1_jfc2h")
 name = "Sacrifice Happiness"
 description = ""
-base_cost = 100.0
+base_cost = 11.0
 currency = 1
-max_purchases = -1
+max_purchases = 1
 effect_id = "sacrifice_happiness"
 value = 1.0
 cost_scale = 1.4
