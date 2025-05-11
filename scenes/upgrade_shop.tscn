@@ -158,7 +158,11 @@ text = "Happiness: "
 [node name="UpgradeHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 2
+theme_override_constants/separation = 20
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/UpgradeHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="UpgradeContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/UpgradeHBox"]
 unique_name_in_owner = true
@@ -173,6 +177,10 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 columns = 3
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/UpgradeHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(50, 8)

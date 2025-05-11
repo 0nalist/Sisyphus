@@ -138,7 +138,7 @@ grow_vertical = 0
 [node name="Parallax2D2" type="Parallax2D" parent="Footer"]
 unique_name_in_owner = true
 rotation = -0.464258
-scroll_offset = Vector2(1820, 0)
+scroll_offset = Vector2(1820, 42)
 repeat_size = Vector2(1924, 0)
 repeat_times = 10
 

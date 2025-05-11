@@ -120,7 +120,9 @@ const MOUNTAIN_NAMES = [
 	"Kyllini", "Thodoris", "Mesa Soros", "Trocharis", "Taygetus", "Pachnes", "Timios Stavros",
 	"Parnassus", "Vardousia", "Tymfi", "Giona", "Gramos", "Kaimaktsalan", "Smolikas", "Olympus",
 	"Olympus 2", "Olympus 3", "Olympus 4", "Olympus 5", "Olympus 6", "Olympus 7", "Olympus 9", "Olympus 10", 
-	"Olympus 11", "Olympus 12",  
+	"Olympus 11", "Olympus 12",  "Olympus 13",  "Olympus 14",  "Olympus 15",  "Olympus 16", "Olympus 17",
+	"Olympus 18",  "Olympus 19",  "Olympus 20",  "Olympus 21",  "Olympus 22",  "Olympus 23", "Olympus 24", 
+	"Olympus 25", "Olympus 26", "Olympus 27", "Olympus 28", "Olympus 29",  
 ]
 
 
@@ -215,11 +217,11 @@ func _process(delta: float) -> void:
 	# Update UI
 	progress_bar.value = progress / summit_height * 100.0
 
-	var scroll_speed = strength / boulder_weight
+	var scroll_speed = (strength / boulder_weight)*2
 	%Parallax2D.autoscroll.x = -scroll_speed
 	%Parallax2D2.autoscroll = Vector2(2, -1) * -scroll_speed
-	if %Parallax2D2.scroll_offset.y > 1457:
-		%Parallax2D2.scroll_offset = Vector2(1820, 991)
+	if %Parallax2D2.scroll_offset.y > 727.5:
+		%Parallax2D2.scroll_offset = Vector2(1820, 42)
 	#print("Sprite Global Pos:", background_sprite.global_position)
 	
 	
@@ -319,13 +321,7 @@ func _handle_end_of_day(success: bool) -> void:
 		happiness += meaning * happiness_conversion_rate
 		summits += 1
 
-	'''
-	for upgrade in all_upgrades:
-		if upgrade.effect_id in upgrade_effects:
-			var effect_func = upgrade_effects[upgrade.effect_id]
-			for i in upgrade.times_purchased:
-				effect_func.call(upgrade.value)
-	'''
+
 	# Reset day progress
 	progress = 0.0
 	suffering = 0.0
